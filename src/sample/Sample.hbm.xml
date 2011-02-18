@@ -4,11 +4,11 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="events.Event" table="EVENTS">
-		<id name="id" column="EVENT_ID">
+	<class name="sample.Sample" table="SAMPLES">
+		<id name="id" column="SAMPLE_ID">
 			<generator class="native"/>
 		</id>
-		<property name="date" type="timestamp" column="EVENT_DATE"/>
+		<property name="date" type="timestamp" column="SAMPLE_DATE"/>
 		<property name="title"/>
 	</class>
 </hibernate-mapping>

@@ -1,15 +1,15 @@
-package events;
+package sample;
 
 import java.util.Date;
 
-public class Event {
+public class Sample {
 	private long id;
 
 	private String title;
 
 	private Date date;
 
-	public Event() {
+	public Sample() {
 	}
 
 	public long getId() {

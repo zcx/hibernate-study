@@ -31,7 +31,7 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hibernate.hbm2ddl.auto">create</property>
 
-		<mapping resource="events/Event.hbm.xml"/>
+		<mapping resource="sample/Sample.hbm.xml"/>
 
 	</session-factory>
 
