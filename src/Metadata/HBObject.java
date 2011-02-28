@@ -1,11 +1,16 @@
 package Metadata;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.mapping.List;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 这个类中将会涉及到hibernate对列表的引用
@@ -13,24 +18,32 @@ import org.hibernate.mapping.List;
  *
  */
 @Entity
-@Table(name="DB_HBOBJECT")
+@Table(name = "DB_HBOBJECT")
 public class HBObject {
-	
+
 	@Id
-	@Column(name="ID")
-	private int id;
-	
-	private List slots = null;
-	
-	public List getSlots() {
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator="idGenerator")
+	@GenericGenerator(name="idGenerator", strategy="uuid")
+	private String id;
+
+	@OneToMany
+	@JoinColumn(name = "SLOTS")
+	private List<HBSlot> slots = null;
+
+	public List<HBSlot> getSlots() {
 		return this.slots;
 	}
 	
-	public int getID(){
+	public void setSlots(List<HBSlot> slots){
+		this.slots = slots;
+	}
+
+	public String getId() {
 		return this.id;
 	}
-	
-	public void setID(int id){
+
+	public void setId(String id) {
 		this.id = id;
 	}
 }
