@@ -9,6 +9,11 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * 为fuzhq分支添加部分代码，制造其与ISSUE0001的冲突，进行测试
+ * @author classfoo
+ *
+ */
 @Entity
 @Table(name="DB_HBSLOT")
 public class HBSlot {
