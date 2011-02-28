@@ -16,6 +16,10 @@ import org.hibernate.annotations.GenericGenerator;
  * 20110228
  *   ISSUE0001 为HBSlot增加owner，这是一个多对一的关系，使得多个HBSlot能够关联到一
  *   个HBObject中，这个提交主要也是为了测试git中尽量频繁创建分支的概念
+ *   
+ * 20110228
+ *   构造另外一个分支ISSUE0002，它是从ISSUE001拷贝的，测试从bug fix分支继续克隆后的
+ *   合并情况
  * @author classfoo
  *
  */
