@@ -12,11 +12,6 @@ import javax.persistence.Version;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 为fuzhq分支添加部分代码，制造其与ISSUE0001的冲突，进行测试
- * @author classfoo
- *
- */
-/**
  * 通过Hibernate构建的元数据Slot存储测试验证类
  * 20110228
  *   ISSUE0001 为HBSlot增加owner，这是一个多对一的关系，使得多个HBSlot能够关联到一
