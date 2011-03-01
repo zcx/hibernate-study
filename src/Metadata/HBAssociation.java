@@ -5,21 +5,28 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "HBASSOCIATION")
 public class HBAssociation {
+
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 	
-	@Column(name="END1ID")
+	@ManyToOne
 	private HBAttribute end1 = null;
 	
-	@Column(name="END2ID")
+	@ManyToOne
 	private HBAttribute end2 = null;
 	
 	@OneToMany

@@ -2,15 +2,21 @@ package Metadata;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "HBPACKAGE")
 public class HBPackage {
+
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 
 	@Version

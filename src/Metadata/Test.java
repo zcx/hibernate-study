@@ -82,6 +82,10 @@ public class Test {
 		conf.addAnnotatedClass(HBLink.class);
 		conf.addAnnotatedClass(HBObject.class);
 		conf.addAnnotatedClass(HBSlot.class);
+		conf.addAnnotatedClass(HBClass.class);
+		conf.addAnnotatedClass(HBAttribute.class);
+		conf.addAnnotatedClass(HBPackage.class);
+		conf.addAnnotatedClass(HBAssociation.class);
 		return conf.buildSessionFactory();
 	}
 }

@@ -5,18 +5,23 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table(name = "HBATTRIBUTE")
 public class HBAttribute {
 
 	@Id
-	@Column(name="ID")
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private int id;
 	
 	@Version
@@ -36,7 +41,6 @@ public class HBAttribute {
 	private boolean isInverseable = false;
 
 	@ManyToOne
-	@Column(name="TYPE")
 	private HBClass type = null;
 
 	@ManyToOne
@@ -107,6 +111,14 @@ public class HBAttribute {
 
 	public void setAssociations(List<HBAssociation> associations) {
 		this.associations = associations;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public int getVersion() {
+		return version;
 	}
 
 }

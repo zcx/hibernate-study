@@ -38,11 +38,9 @@ public class HBClass {
 	private List<HBObject> instances = new ArrayList<HBObject>();
 
 	@ManyToOne
-	@Column(name = "SUPERCLASSID")
 	private HBClass superclass = null;
 
 	@ManyToOne
-	@Column(name = "NAMESPACEID")
 	private HBPackage namespace = null;
 
 	@OneToMany
