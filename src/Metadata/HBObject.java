@@ -1,15 +1,17 @@
 package Metadata;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -18,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "DB_HBOBJECT")
+@Table(name = "HBOBJECT")
 public class HBObject {
 
 	@Id
@@ -28,8 +30,8 @@ public class HBObject {
 	private String id;
 
 	@OneToMany
-	@JoinColumn(name = "SLOTS")
-	private List<HBSlot> slots = null;
+	@Cascade(CascadeType.SAVE_UPDATE)
+	private List<HBSlot> slots = new ArrayList<HBSlot>();
 
 	public List<HBSlot> getSlots() {
 		return this.slots;

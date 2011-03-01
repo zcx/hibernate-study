@@ -12,7 +12,7 @@ import javax.persistence.Version;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="DB_HBLINK")
+@Table(name="HBLINK")
 public class HBLink {
 
 	@Id
