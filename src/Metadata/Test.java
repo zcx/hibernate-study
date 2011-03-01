@@ -22,18 +22,38 @@ public class Test {
 		SessionFactory sf = getSessionFactory();
 		Session session = sf.getCurrentSession();
 		session.beginTransaction();
+		HBClass cls = new HBClass();
+		session.save(cls);
+		//初始化object1，包含slot1，slot2
 		HBObject object1 = new HBObject();
-		session.save(object1);
-		HBObject object2 = new HBObject();
-		session.save(object2);
-		HBLink link = new HBLink();
 		HBSlot slot1 = new HBSlot();
+		slot1.setObject(object1);
 		session.save(slot1);
-		link.setSlot1(slot1);
+		object1.getSlots().add(slot1);
 		HBSlot slot2 = new HBSlot();
+		slot2.setObject(object1);
+		object1.getSlots().add(slot2);
+		session.save(object1);
 		session.save(slot2);
-		link.setSlot2(slot2);
-		session.saveOrUpdate(link);
+		session.save(slot1);
+		//初始化object2，包含slot3，slot4
+		HBObject object2 = new HBObject();
+		HBSlot slot3 = new HBSlot();
+		slot3.setObject(object2);
+		session.save(slot3);
+		object2.getSlots().add(slot3);
+		HBSlot slot4 = new HBSlot();
+		slot4.setObject(object2);
+		session.save(slot4);
+		object2.getSlots().add(slot4);
+		session.save(object2);
+		//初始化link，连接slot1，slot3
+		HBLink link = new HBLink();
+		link.setSlot1(slot1);
+		link.setSlot2(slot3);
+		session.save(link);
+		
+		//
 		List<?> result = session.createQuery("from HBObject").list();
 		Iterator<?> it = result.iterator();
 		while (it.hasNext()) {
@@ -41,6 +61,18 @@ public class Test {
 			System.out.println(s.getId());
 		}
 		session.getTransaction().commit();
+		
+		session = sf.getCurrentSession();
+		session.beginTransaction();
+		List<?> slots = session.createQuery("from HBSlot").list();
+		it = slots.iterator();
+		while(it.hasNext()){
+			HBSlot slot = (HBSlot) it.next();
+			HBObject obj = slot.getObject();
+			System.out.println(obj.getId());
+		}
+		session.getTransaction().commit();
+		
 		sf.close();
 	}
 
@@ -50,6 +82,10 @@ public class Test {
 		conf.addAnnotatedClass(HBLink.class);
 		conf.addAnnotatedClass(HBObject.class);
 		conf.addAnnotatedClass(HBSlot.class);
+		conf.addAnnotatedClass(HBClass.class);
+		conf.addAnnotatedClass(HBAttribute.class);
+		conf.addAnnotatedClass(HBPackage.class);
+		conf.addAnnotatedClass(HBAssociation.class);
 		return conf.buildSessionFactory();
 	}
 }
