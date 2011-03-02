@@ -15,7 +15,7 @@
 		<property name="connection.url">jdbc:mysql://192.168.1.116:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
-		<!-- current session context 实现类-->
+		<!-- current session context 实现类 -->
 		<property name="current_session_context_class">thread</property>
 		<!-- 添加的一个自定义属性，用来自动添加这个包下面的所有entity-->
 		<property name="entity.package">org.hibernate.study.entity</property>
