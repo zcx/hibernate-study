@@ -2,22 +2,16 @@ package Metadata.subject;
 
 import java.util.Set;
 
-public interface SubjectSet {
+import Metadata.metamodel.MetaObject;
 
-	public abstract void setId(String id);
+public interface SubjectSet extends MetaObject{
 
-	public abstract String getId();
+	public void setSubjects(Set<Subject> subjects);
 
-	public abstract void setVersion(int version);
+	public Set<Subject> getSubjects();
 
-	public abstract int getVersion();
+	public void setOwner(SubjectDomain owner);
 
-	public abstract void setSubjects(Set<Subject> subjects);
-
-	public abstract Set<Subject> getSubjects();
-
-	public abstract void setOwner(SubjectDomain owner);
-
-	public abstract SubjectDomain getOwner();
+	public SubjectDomain getOwner();
 
 }

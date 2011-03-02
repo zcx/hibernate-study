@@ -7,13 +7,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import Metadata.metamodel.impl.MetaObjectEntity;
 import Metadata.subject.Subject;
 import Metadata.subject.SubjectField;
 import Metadata.subject.SubjectSet;
@@ -24,8 +28,9 @@ import Metadata.subject.SubjectSet;
  *
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) 
 @Table(name="HBSubject")
-public class SubjectEntity implements Subject {
+public class SubjectEntity extends MetaObjectEntity implements Subject {
 	
 	@Id
 	@Column(name = "ID", length = 32)
@@ -33,7 +38,7 @@ public class SubjectEntity implements Subject {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id = null;
 	
-	@Id
+	@Version
 	@Column(name="VERSION")
 	private int version;
 	
@@ -50,97 +55,61 @@ public class SubjectEntity implements Subject {
 	@JoinColumn(name="SUBJECTSETID")
 	private SubjectSet owner = null;
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#setId(java.lang.String)
-	 */
 	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#getId()
-	 */
 	@Override
 	public String getId() {
 		return id;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#setVersion(int)
-	 */
 	@Override
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#getVersion()
-	 */
 	@Override
 	public int getVersion() {
 		return version;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#setName(java.lang.String)
-	 */
 	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#getName()
-	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#setCaption(java.lang.String)
-	 */
 	@Override
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#getCaption()
-	 */
 	@Override
 	public String getCaption() {
 		return caption;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#setFields(java.util.List)
-	 */
 	@Override
 	public void setFields(List<SubjectField> fields) {
 		this.fields = fields;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#getFields()
-	 */
 	@Override
 	public List<SubjectField> getFields() {
 		return fields;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#setOwner(Metadata.subject.SubjectSetEntity)
-	 */
 	@Override
 	public void setOwner(SubjectSet owner) {
 		this.owner = owner;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.subject.Subject#getOwner()
-	 */
 	@Override
 	public SubjectSet getOwner() {
 		return owner;

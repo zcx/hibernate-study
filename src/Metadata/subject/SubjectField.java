@@ -1,5 +1,7 @@
 package Metadata.subject;
 
-public interface SubjectField {
+import Metadata.metamodel.MetaObject;
+
+public interface SubjectField extends MetaObject{
 
 }

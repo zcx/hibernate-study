@@ -2,30 +2,32 @@ package Metadata.subject;
 
 import java.util.List;
 
-public interface Subject {
+import Metadata.metamodel.MetaObject;
 
-	public abstract void setId(String id);
+public interface Subject extends MetaObject{
 
-	public abstract String getId();
+	public void setId(String id);
 
-	public abstract void setVersion(int version);
+	public String getId();
 
-	public abstract int getVersion();
+	public void setVersion(int version);
 
-	public abstract void setName(String name);
+	public int getVersion();
 
-	public abstract String getName();
+	public void setName(String name);
 
-	public abstract void setCaption(String caption);
+	public String getName();
 
-	public abstract String getCaption();
+	public void setCaption(String caption);
 
-	public abstract void setFields(List<SubjectField> fields);
+	public String getCaption();
 
-	public abstract List<SubjectField> getFields();
+	public void setFields(List<SubjectField> fields);
 
-	public abstract void setOwner(SubjectSet owner);
+	public List<SubjectField> getFields();
 
-	public abstract SubjectSet getOwner();
+	public void setOwner(SubjectSet owner);
+
+	public SubjectSet getOwner();
 
 }
