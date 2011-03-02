@@ -4,19 +4,19 @@ import java.util.List;
 
 public interface MetaSlot {
 
-	public abstract String getID();
+	public String getID();
 
-	public abstract void setID(String id);
+	public void setID(String id);
 
-	public abstract void setVersion(int version);
+	public void setVersion(int version);
 
-	public abstract int getVersion();
+	public int getVersion();
 
-	public abstract void setLinks(List<MetaLink> links);
+	public void setLinks(List<MetaLink> links);
 
-	public abstract List<MetaLink> getLinks();
+	public List<MetaLink> getLinks();
 
-	public abstract void setObject(MetaObject object);
+	public void setObject(MetaObject object);
 
-	public abstract MetaObject getObject();
+	public MetaObject getObject();
 }

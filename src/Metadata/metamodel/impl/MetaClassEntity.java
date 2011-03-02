@@ -48,129 +48,81 @@ public class MetaClassEntity implements MetaClass {
 	@OneToMany
 	private List<MetaClassEntity> subclasses = new ArrayList<MetaClassEntity>();
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setId(java.lang.String)
-	 */
 	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getId()
-	 */
 	@Override
 	public String getId() {
 		return id;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setVersion(int)
-	 */
 	@Override
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getVersion()
-	 */
 	@Override
 	public int getVersion() {
 		return version;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setAttributes(java.util.List)
-	 */
 	@Override
 	public void setAttributes(List<MetaAttributeEntity> attributes) {
 		this.attributes = attributes;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getAttributes()
-	 */
 	@Override
 	public List<MetaAttributeEntity> getAttributes() {
 		return attributes;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setName(java.lang.String)
-	 */
 	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getName()
-	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setInstances(java.util.List)
-	 */
 	@Override
 	public void setInstances(List<MetaObjectEntity> instances) {
 		this.instances = instances;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getInstances()
-	 */
 	@Override
 	public List<MetaObjectEntity> getInstances() {
 		return instances;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setSuperclass(Metadata.metamodel.impl.MetaClass)
-	 */
 	@Override
 	public void setSuperclass(MetaClass superclass) {
 		this.superclass = superclass;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getSuperclass()
-	 */
 	@Override
 	public MetaClass getSuperclass() {
 		return superclass;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setNamespace(Metadata.metamodel.impl.MetaPackageEntity)
-	 */
 	@Override
 	public void setNamespace(MetaPackageEntity namespace) {
 		this.namespace = namespace;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getNamespace()
-	 */
 	@Override
 	public MetaPackageEntity getNamespace() {
 		return namespace;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#setSubclasses(java.util.List)
-	 */
 	@Override
 	public void setSubclasses(List<MetaClassEntity> subclasses) {
 		this.subclasses = subclasses;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaClass#getSubclasses()
-	 */
 	@Override
 	public List<MetaClassEntity> getSubclasses() {
 		return subclasses;

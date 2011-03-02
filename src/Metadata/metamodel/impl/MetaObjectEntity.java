@@ -36,33 +36,21 @@ public class MetaObjectEntity implements MetaObject {
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<MetaSlot> slots = new ArrayList<MetaSlot>();
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaObject#getSlots()
-	 */
 	@Override
 	public List<MetaSlot> getSlots() {
 		return this.slots;
 	}
 	
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaObject#setSlots(java.util.List)
-	 */
 	@Override
 	public void setSlots(List<MetaSlot> slots){
 		this.slots = slots;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaObject#getId()
-	 */
 	@Override
 	public String getId() {
 		return this.id;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.MetaObject#setId(java.lang.String)
-	 */
 	@Override
 	public void setId(String id) {
 		this.id = id;

@@ -36,49 +36,31 @@ public class MetaLinkEntity implements MetaLink {
 	@JoinColumn(name = "SLOT2ID")
 	private MetaSlot slot2;
 	
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.test3#getSlot1()
-	 */
 	@Override
 	public MetaSlot getSlot1(){
 		return this.slot1;
 	}
 	
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.test3#setSlot1(Metadata.metamodel.impl.MetaSlotEntity)
-	 */
 	@Override
 	public void setSlot1(MetaSlot slot){
 		this.slot1 = slot;
 	}
 	
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.test3#getSlot2()
-	 */
 	@Override
 	public MetaSlot getSlot2(){
 		return this.slot2;
 	}
 	
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.test3#setSlot2(Metadata.metamodel.impl.MetaSlotEntity)
-	 */
 	@Override
 	public void setSlot2(MetaSlot slot){
 		this.slot2 = slot;
 	}
 
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.test3#setId(java.lang.String)
-	 */
 	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	/* (non-Javadoc)
-	 * @see Metadata.metamodel.impl.test3#getId()
-	 */
+	
 	@Override
 	public String getId() {
 		return id;

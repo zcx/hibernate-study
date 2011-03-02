@@ -9,35 +9,35 @@ import Metadata.metamodel.impl.MetaPackageEntity;
 
 public interface MetaClass {
 
-	public abstract void setId(String id);
+	public void setId(String id);
 
-	public abstract String getId();
+	public String getId();
 
-	public abstract void setVersion(int version);
+	public void setVersion(int version);
 
-	public abstract int getVersion();
+	public int getVersion();
 
-	public abstract void setAttributes(List<MetaAttributeEntity> attributes);
+	public void setAttributes(List<MetaAttributeEntity> attributes);
 
-	public abstract List<MetaAttributeEntity> getAttributes();
+	public List<MetaAttributeEntity> getAttributes();
 
-	public abstract void setName(String name);
+	public void setName(String name);
 
-	public abstract String getName();
+	public String getName();
 
-	public abstract void setInstances(List<MetaObjectEntity> instances);
+	public void setInstances(List<MetaObjectEntity> instances);
 
-	public abstract List<MetaObjectEntity> getInstances();
+	public List<MetaObjectEntity> getInstances();
 
-	public abstract void setSuperclass(MetaClass superclass);
+	public void setSuperclass(MetaClass superclass);
 
-	public abstract MetaClass getSuperclass();
+	public MetaClass getSuperclass();
 
-	public abstract void setNamespace(MetaPackageEntity namespace);
+	public void setNamespace(MetaPackageEntity namespace);
 
-	public abstract MetaPackageEntity getNamespace();
+	public MetaPackageEntity getNamespace();
 
-	public abstract void setSubclasses(List<MetaClassEntity> subclasses);
+	public void setSubclasses(List<MetaClassEntity> subclasses);
 
-	public abstract List<MetaClassEntity> getSubclasses();
+	public List<MetaClassEntity> getSubclasses();
 }
