@@ -1,9 +1,8 @@
 package org.hibernate.study.entity;
 
-import java.util.UUID;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.id.UUIDHexGenerator;
 import org.hibernate.study.util.HibernateUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -27,9 +26,10 @@ public class SubjectTest {
 
 	private Subject generateSubject() {
 		Subject subject = new Subject();
-		subject.setUid(UUID.randomUUID().toString());
-		subject.setName(UUID.randomUUID().toString());
-		subject.setTitle(UUID.randomUUID().toString());
+		UUIDHexGenerator uuid = new UUIDHexGenerator();
+		subject.setUid((String)uuid.generate(null, null));
+		subject.setName((String)uuid.generate(null, null));
+		subject.setTitle((String)uuid.generate(null, null));
 		return subject;
 	}
 }
