@@ -14,6 +14,10 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import Metadata.metamodel.MetaLink;
+import Metadata.metamodel.MetaObject;
+import Metadata.metamodel.MetaSlot;
+
 /**
  * 通过Hibernate构建的元数据Slot存储测试验证类
  * 20110228
@@ -28,7 +32,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "HBSLOT")
-public class MetaSlotEntity {
+public class MetaSlotEntity implements MetaSlot {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -41,41 +45,73 @@ public class MetaSlotEntity {
 	private int version;
 
     @ManyToOne
-	private MetaObjectEntity object = null;
+	private MetaObject object = null;
 
 	@OneToMany
-	private List<MetaLinkEntity> links = new ArrayList<MetaLinkEntity>();
+	private List<MetaLink> links = new ArrayList<MetaLink>();
 	
 	private int test;
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#getID()
+	 */
+	@Override
 	public String getID() {
 		return this.id;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#setID(java.lang.String)
+	 */
+	@Override
 	public void setID(String id) {
 		this.id = id;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#setVersion(int)
+	 */
+	@Override
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#getVersion()
+	 */
+	@Override
 	public int getVersion() {
 		return version;
 	}
 
-	public void setLinks(List<MetaLinkEntity> links) {
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#setLinks(java.util.List)
+	 */
+	@Override
+	public void setLinks(List<MetaLink> links) {
 		this.links = links;
 	}
 
-	public List<MetaLinkEntity> getLinks() {
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#getLinks()
+	 */
+	@Override
+	public List<MetaLink> getLinks() {
 		return links;
 	}
-	public void setObject(MetaObjectEntity object) {
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#setObject(Metadata.metamodel.impl.MetaObjectEntity)
+	 */
+	@Override
+	public void setObject(MetaObject object) {
 		this.object = object;
 	}
 
-	public MetaObjectEntity getObject() {
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaSlot#getObject()
+	 */
+	@Override
+	public MetaObject getObject() {
 		return object;
 	}
 

@@ -1,14 +1,13 @@
 package Metadata.metamodel;
 
-import Metadata.metamodel.impl.MetaClassEntity;
 import Metadata.metamodel.impl.MetaPackageEntity;
 
 public class MetaDataUtil {
-	public MetaClassEntity getClassById(){
+	public MetaClass getClassById(){
 		return null;
 	}
 	
-	public MetaClassEntity getClassByName(){
+	public MetaClass getClassByName(){
 		return null;
 	}
 	

@@ -7,6 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
+import Metadata.metamodel.MetaClass;
+import Metadata.metamodel.MetaLink;
+import Metadata.metamodel.MetaObject;
+import Metadata.metamodel.MetaSlot;
 import Metadata.metamodel.impl.MetaAssociationEntity;
 import Metadata.metamodel.impl.MetaAttributeEntity;
 import Metadata.metamodel.impl.MetaClassEntity;
@@ -30,10 +34,10 @@ public class Test {
 		SessionFactory sf = getSessionFactory();
 		Session session = sf.getCurrentSession();
 		session.beginTransaction();
-		MetaClassEntity cls = new MetaClassEntity();
+		MetaClass cls = new MetaClassEntity();
 		session.save(cls);
 		//初始化object1，包含slot1，slot2
-		MetaObjectEntity object1 = new MetaObjectEntity();
+		MetaObject object1 = new MetaObjectEntity();
 		MetaSlotEntity slot1 = new MetaSlotEntity();
 		slot1.setObject(object1);
 		session.save(slot1);
@@ -45,7 +49,7 @@ public class Test {
 		session.save(slot2);
 		session.save(slot1);
 		//初始化object2，包含slot3，slot4
-		MetaObjectEntity object2 = new MetaObjectEntity();
+		MetaObject object2 = new MetaObjectEntity();
 		MetaSlotEntity slot3 = new MetaSlotEntity();
 		slot3.setObject(object2);
 		session.save(slot3);
@@ -56,7 +60,7 @@ public class Test {
 		object2.getSlots().add(slot4);
 		session.save(object2);
 		//初始化link，连接slot1，slot3
-		MetaLinkEntity link = new MetaLinkEntity();
+		MetaLink link = new MetaLinkEntity();
 		link.setSlot1(slot1);
 		link.setSlot2(slot3);
 		session.save(link);
@@ -65,7 +69,7 @@ public class Test {
 		List<?> result = session.createQuery("from HBObject").list();
 		Iterator<?> it = result.iterator();
 		while (it.hasNext()) {
-			MetaObjectEntity s = (MetaObjectEntity) it.next();
+			MetaObject s = (MetaObject) it.next();
 			System.out.println(s.getId());
 		}
 		session.getTransaction().commit();
@@ -75,8 +79,8 @@ public class Test {
 		List<?> slots = session.createQuery("from HBSlot").list();
 		it = slots.iterator();
 		while(it.hasNext()){
-			MetaSlotEntity slot = (MetaSlotEntity) it.next();
-			MetaObjectEntity obj = slot.getObject();
+			MetaSlot slot = (MetaSlot) it.next();
+			MetaObject obj = slot.getObject();
 			System.out.println(obj.getId());
 		}
 		session.getTransaction().commit();

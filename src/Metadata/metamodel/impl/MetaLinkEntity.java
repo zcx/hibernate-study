@@ -11,9 +11,12 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import Metadata.metamodel.MetaLink;
+import Metadata.metamodel.MetaSlot;
+
 @Entity
 @Table(name="HBLINK")
-public class MetaLinkEntity {
+public class MetaLinkEntity implements MetaLink {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -27,32 +30,56 @@ public class MetaLinkEntity {
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT1ID")
-	private MetaSlotEntity slot1;
+	private MetaSlot slot1;
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT2ID")
-	private MetaSlotEntity slot2;
+	private MetaSlot slot2;
 	
-	public MetaSlotEntity getSlot1(){
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.test3#getSlot1()
+	 */
+	@Override
+	public MetaSlot getSlot1(){
 		return this.slot1;
 	}
 	
-	public void setSlot1(MetaSlotEntity slot){
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.test3#setSlot1(Metadata.metamodel.impl.MetaSlotEntity)
+	 */
+	@Override
+	public void setSlot1(MetaSlot slot){
 		this.slot1 = slot;
 	}
 	
-	public MetaSlotEntity getSlot2(){
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.test3#getSlot2()
+	 */
+	@Override
+	public MetaSlot getSlot2(){
 		return this.slot2;
 	}
 	
-	public void setSlot2(MetaSlotEntity slot){
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.test3#setSlot2(Metadata.metamodel.impl.MetaSlotEntity)
+	 */
+	@Override
+	public void setSlot2(MetaSlot slot){
 		this.slot2 = slot;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.test3#setId(java.lang.String)
+	 */
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.test3#getId()
+	 */
+	@Override
 	public String getId() {
 		return id;
 	}

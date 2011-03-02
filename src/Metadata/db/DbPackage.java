@@ -1,5 +1,5 @@
 package Metadata.db;
 
-public class HBField {
+public class DbPackage {
 
 }

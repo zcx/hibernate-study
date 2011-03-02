@@ -14,6 +14,9 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 
+import Metadata.metamodel.MetaObject;
+import Metadata.metamodel.MetaSlot;
+
 /**
  * 这个类中将会涉及到hibernate对列表的引用
  * @author classfoo
@@ -21,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "HBOBJECT")
-public class MetaObjectEntity {
+public class MetaObjectEntity implements MetaObject {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -31,20 +34,36 @@ public class MetaObjectEntity {
 
 	@OneToMany
 	@Cascade(CascadeType.SAVE_UPDATE)
-	private List<MetaSlotEntity> slots = new ArrayList<MetaSlotEntity>();
+	private List<MetaSlot> slots = new ArrayList<MetaSlot>();
 
-	public List<MetaSlotEntity> getSlots() {
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaObject#getSlots()
+	 */
+	@Override
+	public List<MetaSlot> getSlots() {
 		return this.slots;
 	}
 	
-	public void setSlots(List<MetaSlotEntity> slots){
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaObject#setSlots(java.util.List)
+	 */
+	@Override
+	public void setSlots(List<MetaSlot> slots){
 		this.slots = slots;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaObject#getId()
+	 */
+	@Override
 	public String getId() {
 		return this.id;
 	}
 
+	/* (non-Javadoc)
+	 * @see Metadata.metamodel.impl.MetaObject#setId(java.lang.String)
+	 */
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
