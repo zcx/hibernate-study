@@ -1,17 +1,44 @@
 package Metadata.subject;
 
+import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import Metadata.metamodel.MetaObject;
 
-public interface SubjectSet extends MetaObject{
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "HBSubjectSet")
+public class SubjectSet extends MetaObject {
 
-	public void setSubjects(Set<Subject> subjects);
+	@OneToMany
+	private Set<Subject> subjects = new HashSet<Subject>();
 
-	public Set<Subject> getSubjects();
+	@ManyToOne
+	@JoinColumn(name = "DOMAINID")
+	private SubjectDomain owner = null;
 
-	public void setOwner(SubjectDomain owner);
+	public void setSubjects(Set<Subject> subjects) {
+		this.subjects = subjects;
+	}
 
-	public SubjectDomain getOwner();
+	public Set<Subject> getSubjects() {
+		return subjects;
+	}
+
+	public void setOwner(SubjectDomain owner) {
+		this.owner = owner;
+	}
+
+	public SubjectDomain getOwner() {
+		return owner;
+	}
 
 }

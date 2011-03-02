@@ -1,43 +1,124 @@
 package Metadata.metamodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface MetaAttribute {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-	public int getId();
+import org.hibernate.annotations.GenericGenerator;
 
-	public void setId(int id);
+@Entity
+@Table(name = "MDR_META_ATTRIBUTE")
+public class MetaAttribute {
 
-	public String getName();
+	@Id
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private int id;
 
-	public void setName(String name);
+	@Version
+	@Column(name = "VERSION")
+	private int version;
 
-	public boolean isNullable();
+	@Column(name = "NAME")
+	private String name = null;
 
-	public void setNullable(boolean isNullable);
+	@Column(name = "ISNULLABLE")
+	private boolean isNullable = false;
 
-	public boolean isStatic();
+	@Column(name = "ISSTATIC")
+	private boolean isStatic = false;
 
-	public void setStatic(boolean isStatic);
+	@Column(name = "ISINVERSEABLE")
+	private boolean isInverseable = false;
 
-	public boolean isInverseable();
+	@ManyToOne
+	private MetaClass type = null;
 
-	public void setInverseable(boolean isInverseable);
+	@ManyToOne
+	private MetaClass owner = null;
 
-	public MetaClass getType();
+	@OneToMany
+	private List<MetaAssociation> associations = new ArrayList<MetaAssociation>();
 
-	public void setType(MetaClass type);
+	public int getId() {
+		return id;
+	}
 
-	public MetaClass getOwner();
+	public void setId(int id) {
+		this.id = id;
+	}
 
-	public void setOwner(MetaClass owner);
+	public String getName() {
+		return name;
+	}
 
-	public List<MetaAssociation> getAssociations();
+	public void setName(String name) {
+		this.name = name;
+	}
 
-	public void setAssociations(List<MetaAssociation> associations);
+	public boolean isNullable() {
+		return isNullable;
+	}
 
-	public void setVersion(int version);
+	public void setNullable(boolean isNullable) {
+		this.isNullable = isNullable;
+	}
 
-	public int getVersion();
+	public boolean isStatic() {
+		return isStatic;
+	}
+
+	public void setStatic(boolean isStatic) {
+		this.isStatic = isStatic;
+	}
+
+	public boolean isInverseable() {
+		return isInverseable;
+	}
+
+	public void setInverseable(boolean isInverseable) {
+		this.isInverseable = isInverseable;
+	}
+
+	public MetaClass getType() {
+		return type;
+	}
+
+	public void setType(MetaClass type) {
+		this.type = type;
+	}
+
+	public MetaClass getOwner() {
+		return owner;
+	}
+
+	public void setOwner(MetaClass owner) {
+		this.owner = owner;
+	}
+
+	public List<MetaAssociation> getAssociations() {
+		return associations;
+	}
+
+	public void setAssociations(List<MetaAssociation> associations) {
+		this.associations = associations;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+	public int getVersion() {
+		return version;
+	}
 
 }

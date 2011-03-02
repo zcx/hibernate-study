@@ -1,38 +1,112 @@
 package Metadata.metamodel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface MetaClass {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
-	public void setId(String id);
+import org.hibernate.annotations.GenericGenerator;
 
-	public String getId();
+@Entity
+@Table(name = "MDR_META_CLASS")
+public class MetaClass {
 
-	public void setVersion(int version);
+	@Id
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String id = null;
 
-	public int getVersion();
+	@Version
+	@Column(name = "VERSION")
+	private int version;
 
-	public void setAttributes(List<MetaAttribute> attributes);
+	@Column(name = "NAME")
+	private String name = null;
 
-	public List<MetaAttribute> getAttributes();
+	@OneToMany
+	private List<MetaAttribute> attributes = new ArrayList<MetaAttribute>();
 
-	public void setName(String name);
+	@OneToMany
+	private List<MetaObject> instances = new ArrayList<MetaObject>();
 
-	public String getName();
+	@ManyToOne
+	private MetaClass superclass = null;
 
-	public void setInstances(List<MetaObject> instances);
+	@ManyToOne
+	private MetaPackage namespace = null;
 
-	public List<MetaObject> getInstances();
+	@OneToMany
+	private List<MetaClass> subclasses = new ArrayList<MetaClass>();
 
-	public void setSuperclass(MetaClass superclass);
+	public void setId(String id) {
+		this.id = id;
+	}
 
-	public MetaClass getSuperclass();
+	public String getId() {
+		return id;
+	}
 
-	public void setNamespace(MetaPackage namespace);
+	public void setVersion(int version) {
+		this.version = version;
+	}
 
-	public MetaPackage getNamespace();
+	public int getVersion() {
+		return version;
+	}
 
-	public void setSubclasses(List<MetaClass> subclasses);
+	public void setAttributes(List<MetaAttribute> attributes) {
+		this.attributes = attributes;
+	}
 
-	public List<MetaClass> getSubclasses();
+	public List<MetaAttribute> getAttributes() {
+		return attributes;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setInstances(List<MetaObject> instances) {
+		this.instances = instances;
+	}
+
+	public List<MetaObject> getInstances() {
+		return instances;
+	}
+
+	public void setSuperclass(MetaClass superclass) {
+		this.superclass = superclass;
+	}
+
+	public MetaClass getSuperclass() {
+		return superclass;
+	}
+
+	public void setNamespace(MetaPackage namespace) {
+		this.namespace = namespace;
+	}
+
+	public MetaPackage getNamespace() {
+		return namespace;
+	}
+
+	public void setSubclasses(List<MetaClass> subclasses) {
+		this.subclasses = subclasses;
+	}
+
+	public List<MetaClass> getSubclasses() {
+		return subclasses;
+	}
 }

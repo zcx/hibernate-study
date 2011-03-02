@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.hibernate.cfg.Configuration;
+
 import Metadata.metamodel.MetaClass;
 import Metadata.metamodel.MetaPackage;
 
@@ -11,6 +13,10 @@ import Metadata.metamodel.MetaPackage;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class SubjectPackage extends MetaPackage{
 	
+	public SubjectPackage(Configuration configure) {
+		super(configure);
+	}
+
 	public MetaClass getSubjectDomain() {
 		
 		return null;

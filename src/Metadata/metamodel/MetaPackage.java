@@ -7,22 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.cfg.Configuration;
 
-import Metadata.metamodel.impl.MetaAssociationEntity;
-import Metadata.metamodel.impl.MetaAttributeEntity;
-import Metadata.metamodel.impl.MetaClassEntity;
-import Metadata.metamodel.impl.MetaLinkEntity;
-import Metadata.metamodel.impl.MetaObjectEntity;
-import Metadata.metamodel.impl.MetaSlotEntity;
-
 @Entity
-@Table(name = "HBPACKAGE")
+@Table(name = "MDR_META_PACKAGE")
 public class MetaPackage {
 
 	@Id
@@ -37,8 +30,13 @@ public class MetaPackage {
 
 	@Column(name = "NAME")
 	private String name;
-	
-	public Set<MetaClassEntity> classes = new HashSet<MetaClassEntity>();
+
+	@OneToMany
+	public Set<MetaClass> classes = new HashSet<MetaClass>();
+
+	public MetaPackage(Configuration configure) {
+		this.loadAnnotationClasses(configure);
+	}
 
 	public void setId(String id) {
 		this.id = id;
@@ -63,18 +61,15 @@ public class MetaPackage {
 	public String getName() {
 		return name;
 	}
-	
-	private SessionFactory getSessionFactory() {
-		Configuration conf = new Configuration();
-		conf.configure("/Metadata/metadata-hibernate.cfg.xml");
-		conf.addAnnotatedClass(MetaLinkEntity.class);
-		conf.addAnnotatedClass(MetaObjectEntity.class);
-		conf.addAnnotatedClass(MetaSlotEntity.class);
-		conf.addAnnotatedClass(MetaClassEntity.class);
-		conf.addAnnotatedClass(MetaAttributeEntity.class);
+
+	private void loadAnnotationClasses(Configuration conf) {
+		conf.addAnnotatedClass(MetaLink.class);
+		conf.addAnnotatedClass(MetaObject.class);
+		conf.addAnnotatedClass(MetaSlot.class);
+		conf.addAnnotatedClass(MetaClass.class);
+		conf.addAnnotatedClass(MetaAttribute.class);
 		conf.addAnnotatedClass(MetaPackage.class);
-		conf.addAnnotatedClass(MetaAssociationEntity.class);
-		return conf.buildSessionFactory();
+		conf.addAnnotatedClass(MetaAssociation.class);
 	}
-	
+
 }
