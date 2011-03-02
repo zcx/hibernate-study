@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,6 +32,10 @@ public class MetaObjectEntity implements MetaObject {
 	@GeneratedValue(generator="idGenerator")
 	@GenericGenerator(name="idGenerator", strategy="uuid")
 	private String id;
+	
+	@Version
+	@Column(name="VERSION")
+	private int version;
 
 	@OneToMany
 	@Cascade(CascadeType.SAVE_UPDATE)
@@ -54,5 +59,15 @@ public class MetaObjectEntity implements MetaObject {
 	@Override
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	@Override
+	public int getVersion() {
+		return this.version;
+	}
+	
+	@Override
+	public void setVersion(int version) {
+		this.version = version;
 	}
 }

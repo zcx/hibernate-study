@@ -1,22 +1,25 @@
 package Metadata.metamodel;
 
+import Metadata.metamodel.impl.MetaAssociationEntity;
+import Metadata.metamodel.impl.MetaAttributeEntity;
+import Metadata.metamodel.impl.MetaClassEntity;
+
 public class MetaModel {
 	
 	
-	public void createClass(){
-		
+	public static final MetaClass createMetaClass(){
+		return new MetaClassEntity();
 	}
 	
-	public void createAssociation(){
-		
+	public static final  MetaAssociation createMetaAssociation(){
+		return new MetaAssociationEntity();
 	}
 	
-	public void createAttribute(){
-		
-		
+	public static final MetaAttribute createMetaAttribute(){
+		return new MetaAttributeEntity();
 	}
 	
-	public void createPackage(){
-		
+	public static final MetaPackage createMetaPackage(){
+		return new MetaPackage();
 	}
 }

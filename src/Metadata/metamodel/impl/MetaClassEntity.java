@@ -14,7 +14,10 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import Metadata.metamodel.MetaAttribute;
 import Metadata.metamodel.MetaClass;
+import Metadata.metamodel.MetaObject;
+import Metadata.metamodel.MetaPackage;
 
 @Entity
 @Table(name="HBCLASS")
@@ -34,19 +37,19 @@ public class MetaClassEntity implements MetaClass {
 	private String name = null;
 
 	@OneToMany
-	private List<MetaAttributeEntity> attributes = new ArrayList<MetaAttributeEntity>();
+	private List<MetaAttribute> attributes = new ArrayList<MetaAttribute>();
 
 	@OneToMany
-	private List<MetaObjectEntity> instances = new ArrayList<MetaObjectEntity>();
+	private List<MetaObject> instances = new ArrayList<MetaObject>();
 
 	@ManyToOne
 	private MetaClass superclass = null;
 
 	@ManyToOne
-	private MetaPackageEntity namespace = null;
+	private MetaPackage namespace = null;
 
 	@OneToMany
-	private List<MetaClassEntity> subclasses = new ArrayList<MetaClassEntity>();
+	private List<MetaClass> subclasses = new ArrayList<MetaClass>();
 
 	@Override
 	public void setId(String id) {
@@ -69,12 +72,12 @@ public class MetaClassEntity implements MetaClass {
 	}
 
 	@Override
-	public void setAttributes(List<MetaAttributeEntity> attributes) {
+	public void setAttributes(List<MetaAttribute> attributes) {
 		this.attributes = attributes;
 	}
 
 	@Override
-	public List<MetaAttributeEntity> getAttributes() {
+	public List<MetaAttribute> getAttributes() {
 		return attributes;
 	}
 
@@ -89,12 +92,12 @@ public class MetaClassEntity implements MetaClass {
 	}
 
 	@Override
-	public void setInstances(List<MetaObjectEntity> instances) {
+	public void setInstances(List<MetaObject> instances) {
 		this.instances = instances;
 	}
 
 	@Override
-	public List<MetaObjectEntity> getInstances() {
+	public List<MetaObject> getInstances() {
 		return instances;
 	}
 
@@ -109,22 +112,22 @@ public class MetaClassEntity implements MetaClass {
 	}
 
 	@Override
-	public void setNamespace(MetaPackageEntity namespace) {
+	public void setNamespace(MetaPackage namespace) {
 		this.namespace = namespace;
 	}
 
 	@Override
-	public MetaPackageEntity getNamespace() {
+	public MetaPackage getNamespace() {
 		return namespace;
 	}
 
 	@Override
-	public void setSubclasses(List<MetaClassEntity> subclasses) {
+	public void setSubclasses(List<MetaClass> subclasses) {
 		this.subclasses = subclasses;
 	}
 
 	@Override
-	public List<MetaClassEntity> getSubclasses() {
+	public List<MetaClass> getSubclasses() {
 		return subclasses;
 	}
 }

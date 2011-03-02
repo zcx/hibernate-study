@@ -1,6 +1,5 @@
 package Metadata.metamodel;
 
-import Metadata.metamodel.impl.MetaPackageEntity;
 
 public class MetaDataUtil {
 	public MetaClass getClassById(){
@@ -11,7 +10,7 @@ public class MetaDataUtil {
 		return null;
 	}
 	
-	public MetaPackageEntity getPackageByName(){
+	public MetaPackage getPackageByName(){
 		return null;
 	}
 	

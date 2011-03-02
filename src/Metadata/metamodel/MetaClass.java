@@ -2,11 +2,6 @@ package Metadata.metamodel;
 
 import java.util.List;
 
-import Metadata.metamodel.impl.MetaAttributeEntity;
-import Metadata.metamodel.impl.MetaClassEntity;
-import Metadata.metamodel.impl.MetaObjectEntity;
-import Metadata.metamodel.impl.MetaPackageEntity;
-
 public interface MetaClass {
 
 	public void setId(String id);
@@ -17,27 +12,27 @@ public interface MetaClass {
 
 	public int getVersion();
 
-	public void setAttributes(List<MetaAttributeEntity> attributes);
+	public void setAttributes(List<MetaAttribute> attributes);
 
-	public List<MetaAttributeEntity> getAttributes();
+	public List<MetaAttribute> getAttributes();
 
 	public void setName(String name);
 
 	public String getName();
 
-	public void setInstances(List<MetaObjectEntity> instances);
+	public void setInstances(List<MetaObject> instances);
 
-	public List<MetaObjectEntity> getInstances();
+	public List<MetaObject> getInstances();
 
 	public void setSuperclass(MetaClass superclass);
 
 	public MetaClass getSuperclass();
 
-	public void setNamespace(MetaPackageEntity namespace);
+	public void setNamespace(MetaPackage namespace);
 
-	public MetaPackageEntity getNamespace();
+	public MetaPackage getNamespace();
 
-	public void setSubclasses(List<MetaClassEntity> subclasses);
+	public void setSubclasses(List<MetaClass> subclasses);
 
-	public List<MetaClassEntity> getSubclasses();
+	public List<MetaClass> getSubclasses();
 }
