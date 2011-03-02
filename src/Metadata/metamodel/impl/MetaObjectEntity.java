@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "HBOBJECT")
-public class HBObject {
+public class MetaObjectEntity {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -31,13 +31,13 @@ public class HBObject {
 
 	@OneToMany
 	@Cascade(CascadeType.SAVE_UPDATE)
-	private List<HBSlot> slots = new ArrayList<HBSlot>();
+	private List<MetaSlotEntity> slots = new ArrayList<MetaSlotEntity>();
 
-	public List<HBSlot> getSlots() {
+	public List<MetaSlotEntity> getSlots() {
 		return this.slots;
 	}
 	
-	public void setSlots(List<HBSlot> slots){
+	public void setSlots(List<MetaSlotEntity> slots){
 		this.slots = slots;
 	}
 

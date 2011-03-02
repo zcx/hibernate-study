@@ -1,4 +1,7 @@
-package Metadata;
+package Metadata.metamodel.impl;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.cfg.Configuration;
 
 @Entity
 @Table(name = "HBPACKAGE")
-public class HBPackage {
+public class MetaPackageEntity {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -25,6 +30,8 @@ public class HBPackage {
 
 	@Column(name = "NAME")
 	private String name;
+	
+	public Set<MetaClassEntity> classes = new HashSet<MetaClassEntity>();
 
 	public void setId(String id) {
 		this.id = id;
@@ -49,4 +56,18 @@ public class HBPackage {
 	public String getName() {
 		return name;
 	}
+	
+	private SessionFactory getSessionFactory() {
+		Configuration conf = new Configuration();
+		conf.configure("/Metadata/metadata-hibernate.cfg.xml");
+		conf.addAnnotatedClass(MetaLinkEntity.class);
+		conf.addAnnotatedClass(MetaObjectEntity.class);
+		conf.addAnnotatedClass(MetaSlotEntity.class);
+		conf.addAnnotatedClass(MetaClassEntity.class);
+		conf.addAnnotatedClass(MetaAttributeEntity.class);
+		conf.addAnnotatedClass(MetaPackageEntity.class);
+		conf.addAnnotatedClass(MetaAssociationEntity.class);
+		return conf.buildSessionFactory();
+	}
+	
 }

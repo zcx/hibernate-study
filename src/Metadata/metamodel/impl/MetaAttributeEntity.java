@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "HBATTRIBUTE")
-public class HBAttribute {
+public class MetaAttributeEntity {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -41,13 +41,13 @@ public class HBAttribute {
 	private boolean isInverseable = false;
 
 	@ManyToOne
-	private HBClass type = null;
+	private MetaClassEntity type = null;
 
 	@ManyToOne
-	private HBClass owner = null;
+	private MetaClassEntity owner = null;
 
 	@OneToMany
-	private List<HBAssociation> associations = new ArrayList<HBAssociation>();
+	private List<MetaAssociationEntity> associations = new ArrayList<MetaAssociationEntity>();
 
 	public int getId() {
 		return id;
@@ -89,27 +89,27 @@ public class HBAttribute {
 		this.isInverseable = isInverseable;
 	}
 
-	public HBClass getType() {
+	public MetaClassEntity getType() {
 		return type;
 	}
 
-	public void setType(HBClass type) {
+	public void setType(MetaClassEntity type) {
 		this.type = type;
 	}
 
-	public HBClass getOwner() {
+	public MetaClassEntity getOwner() {
 		return owner;
 	}
 
-	public void setOwner(HBClass owner) {
+	public void setOwner(MetaClassEntity owner) {
 		this.owner = owner;
 	}
 
-	public List<HBAssociation> getAssociations() {
+	public List<MetaAssociationEntity> getAssociations() {
 		return associations;
 	}
 
-	public void setAssociations(List<HBAssociation> associations) {
+	public void setAssociations(List<MetaAssociationEntity> associations) {
 		this.associations = associations;
 	}
 

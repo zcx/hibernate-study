@@ -7,6 +7,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.classic.Session;
 
+import Metadata.metamodel.impl.MetaAssociationEntity;
+import Metadata.metamodel.impl.MetaAttributeEntity;
+import Metadata.metamodel.impl.MetaClassEntity;
+import Metadata.metamodel.impl.MetaLinkEntity;
+import Metadata.metamodel.impl.MetaObjectEntity;
+import Metadata.metamodel.impl.MetaPackageEntity;
+import Metadata.metamodel.impl.MetaSlotEntity;
+
 /**
  * 测试类
  * @author classfoo
@@ -22,33 +30,33 @@ public class Test {
 		SessionFactory sf = getSessionFactory();
 		Session session = sf.getCurrentSession();
 		session.beginTransaction();
-		HBClass cls = new HBClass();
+		MetaClassEntity cls = new MetaClassEntity();
 		session.save(cls);
 		//初始化object1，包含slot1，slot2
-		HBObject object1 = new HBObject();
-		HBSlot slot1 = new HBSlot();
+		MetaObjectEntity object1 = new MetaObjectEntity();
+		MetaSlotEntity slot1 = new MetaSlotEntity();
 		slot1.setObject(object1);
 		session.save(slot1);
 		object1.getSlots().add(slot1);
-		HBSlot slot2 = new HBSlot();
+		MetaSlotEntity slot2 = new MetaSlotEntity();
 		slot2.setObject(object1);
 		object1.getSlots().add(slot2);
 		session.save(object1);
 		session.save(slot2);
 		session.save(slot1);
 		//初始化object2，包含slot3，slot4
-		HBObject object2 = new HBObject();
-		HBSlot slot3 = new HBSlot();
+		MetaObjectEntity object2 = new MetaObjectEntity();
+		MetaSlotEntity slot3 = new MetaSlotEntity();
 		slot3.setObject(object2);
 		session.save(slot3);
 		object2.getSlots().add(slot3);
-		HBSlot slot4 = new HBSlot();
+		MetaSlotEntity slot4 = new MetaSlotEntity();
 		slot4.setObject(object2);
 		session.save(slot4);
 		object2.getSlots().add(slot4);
 		session.save(object2);
 		//初始化link，连接slot1，slot3
-		HBLink link = new HBLink();
+		MetaLinkEntity link = new MetaLinkEntity();
 		link.setSlot1(slot1);
 		link.setSlot2(slot3);
 		session.save(link);
@@ -57,7 +65,7 @@ public class Test {
 		List<?> result = session.createQuery("from HBObject").list();
 		Iterator<?> it = result.iterator();
 		while (it.hasNext()) {
-			HBObject s = (HBObject) it.next();
+			MetaObjectEntity s = (MetaObjectEntity) it.next();
 			System.out.println(s.getId());
 		}
 		session.getTransaction().commit();
@@ -67,8 +75,8 @@ public class Test {
 		List<?> slots = session.createQuery("from HBSlot").list();
 		it = slots.iterator();
 		while(it.hasNext()){
-			HBSlot slot = (HBSlot) it.next();
-			HBObject obj = slot.getObject();
+			MetaSlotEntity slot = (MetaSlotEntity) it.next();
+			MetaObjectEntity obj = slot.getObject();
 			System.out.println(obj.getId());
 		}
 		session.getTransaction().commit();
@@ -79,13 +87,13 @@ public class Test {
 	private SessionFactory getSessionFactory() {
 		Configuration conf = new Configuration();
 		conf.configure("/Metadata/metadata-hibernate.cfg.xml");
-		conf.addAnnotatedClass(HBLink.class);
-		conf.addAnnotatedClass(HBObject.class);
-		conf.addAnnotatedClass(HBSlot.class);
-		conf.addAnnotatedClass(HBClass.class);
-		conf.addAnnotatedClass(HBAttribute.class);
-		conf.addAnnotatedClass(HBPackage.class);
-		conf.addAnnotatedClass(HBAssociation.class);
+		conf.addAnnotatedClass(MetaLinkEntity.class);
+		conf.addAnnotatedClass(MetaObjectEntity.class);
+		conf.addAnnotatedClass(MetaSlotEntity.class);
+		conf.addAnnotatedClass(MetaClassEntity.class);
+		conf.addAnnotatedClass(MetaAttributeEntity.class);
+		conf.addAnnotatedClass(MetaPackageEntity.class);
+		conf.addAnnotatedClass(MetaAssociationEntity.class);
 		return conf.buildSessionFactory();
 	}
 }

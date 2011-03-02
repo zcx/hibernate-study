@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel.impl;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="HBLINK")
-public class HBLink {
+public class MetaLinkEntity {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -27,25 +27,25 @@ public class HBLink {
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT1ID")
-	private HBSlot slot1;
+	private MetaSlotEntity slot1;
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT2ID")
-	private HBSlot slot2;
+	private MetaSlotEntity slot2;
 	
-	public HBSlot getSlot1(){
+	public MetaSlotEntity getSlot1(){
 		return this.slot1;
 	}
 	
-	public void setSlot1(HBSlot slot){
+	public void setSlot1(MetaSlotEntity slot){
 		this.slot1 = slot;
 	}
 	
-	public HBSlot getSlot2(){
+	public MetaSlotEntity getSlot2(){
 		return this.slot2;
 	}
 	
-	public void setSlot2(HBSlot slot){
+	public void setSlot2(MetaSlotEntity slot){
 		this.slot2 = slot;
 	}
 

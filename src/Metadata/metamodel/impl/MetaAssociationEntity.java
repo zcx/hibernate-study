@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "HBASSOCIATION")
-public class HBAssociation {
+public class MetaAssociationEntity {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -24,35 +24,35 @@ public class HBAssociation {
 	private String id;
 	
 	@ManyToOne
-	private HBAttribute end1 = null;
+	private MetaAttributeEntity end1 = null;
 	
 	@ManyToOne
-	private HBAttribute end2 = null;
+	private MetaAttributeEntity end2 = null;
 	
 	@OneToMany
-	private List<HBLink> links = new ArrayList<HBLink>();
+	private List<MetaLinkEntity> links = new ArrayList<MetaLinkEntity>();
 
-	public void setEnd1(HBAttribute end1) {
+	public void setEnd1(MetaAttributeEntity end1) {
 		this.end1 = end1;
 	}
 
-	public HBAttribute getEnd1() {
+	public MetaAttributeEntity getEnd1() {
 		return end1;
 	}
 
-	public void setEnd2(HBAttribute end2) {
+	public void setEnd2(MetaAttributeEntity end2) {
 		this.end2 = end2;
 	}
 
-	public HBAttribute getEnd2() {
+	public MetaAttributeEntity getEnd2() {
 		return end2;
 	}
 
-	public void setLinks(List<HBLink> links) {
+	public void setLinks(List<MetaLinkEntity> links) {
 		this.links = links;
 	}
 
-	public List<HBLink> getLinks() {
+	public List<MetaLinkEntity> getLinks() {
 		return links;
 	}
 
