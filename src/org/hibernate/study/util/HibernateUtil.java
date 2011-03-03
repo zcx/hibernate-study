@@ -1,10 +1,13 @@
 package org.hibernate.study.util;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 /**
@@ -32,6 +35,37 @@ public class HibernateUtil {
 		return sf;
 	}
 
+	public static Session getCurrentSession() {
+		return getSessionFactory().getCurrentSession();
+	}
+
+	public static Object save(final Object object) {
+		return Template.execute(new Callback() {
+			@Override
+			public Object execute(Session session) {
+				return session.save(object);
+			}
+		});
+	}
+
+	public static Object load(final Class clazz, final Serializable id) {
+		return Template.execute(new Callback() {
+			@Override
+			public Object execute(Session session) {
+				return session.load(clazz, id);
+			}
+		});
+	}
+
+	public static Object get(final Class clazz, final Serializable id) {
+		return Template.execute(new Callback() {
+			@Override
+			public Object execute(Session session) {
+				return session.get(clazz, id);
+			}
+		});
+	}
+
 	private static void buildSessionFactory() {
 		Configuration config = new Configuration();
 		config.configure(CONFIG_PATH);
@@ -47,7 +81,7 @@ public class HibernateUtil {
 			if (class1.getAnnotation(Entity.class) != null) {
 				config.addAnnotatedClass(class1);
 			}
-			
+
 			/**
 			if (class1.getAnnotation(org.hibernate.annotations.Entity.class) != null) {
 				config.addAnnotatedClass(class1);
@@ -55,4 +89,35 @@ public class HibernateUtil {
 			*/
 		}
 	}
+}
+
+class Template {
+
+	public static Object execute(Callback callback) {
+		Session session = null;
+		Object result = null;
+		Transaction tx = null;
+		try {
+			session = HibernateUtil.getCurrentSession();
+			tx = session.beginTransaction();
+			result = callback.execute(session);
+			tx.commit();
+		}
+		catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+				//				session.close();
+			}
+		}
+		return result;
+	}
+
+}
+
+interface Callback {
+	Object execute(Session session);
 }
