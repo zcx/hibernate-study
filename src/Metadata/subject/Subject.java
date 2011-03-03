@@ -1,19 +1,21 @@
 package Metadata.subject;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import Metadata.metamodel.MetaObject;
 
@@ -23,58 +25,88 @@ import Metadata.metamodel.MetaObject;
  *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "MDR_SUBJECT_SUBJECT")
-@PrimaryKeyJoinColumn(name="ID",referencedColumnName="ID")  
-//@NamedQueries({
-//		//下面代码是无效的
-//		@NamedQuery(name = "SelectSubject", query = "select new Subject(id) from Subject"),
-//		@NamedQuery(name = "CountSelectAricle", query = "select count(*) from Aricle"),
-//		@NamedQuery(name = "findAriclebyId", query = "select new Aricle(id,title,subTitle,hits,addTime,tag) from Aricle where id=?"),
-//		@NamedQuery(name = "SelectAricleWithCategory", query = "select new Aricle(id,title,subTitle,hits,addTime,category) from Aricle aricle"),
-//		@NamedQuery(name = "SelectAricleWithCategoryId", query = "select new Aricle(id,title,subTitle,hits,addTime,category.id) from Aricle aricle") })
-public class Subject extends MetaObject {
-
-	@Column(name = "NAME")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) 
+@Table(name="HBSubject")
+public class Subject extends MetaObject{
+	
+	@Id
+	@Column(name = "ID", length = 32)
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String id = null;
+	
+	@Version
+	@Column(name="VERSION")
+	private int version;
+	
+	@Column(name="NAME")
 	private String name = null;
-
-	@Column(name = "CAPTION")
+	
+	@Column(name="CAPTION")
 	private String caption = null;
-
+	
 	@OneToMany
-	private Set<SubjectField> fields = new HashSet<SubjectField>();
-
+	private List<SubjectField> fields = new ArrayList<SubjectField>();
+	
 	@ManyToOne
-	@JoinColumn(name = "SUBJECTSETID")
+	@JoinColumn(name="SUBJECTSETID")
 	private SubjectSet owner = null;
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+
+
+	public int getVersion() {
+		return version;
+	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
 
+
 	public String getCaption() {
 		return caption;
 	}
 
-	public void setFields(Set<SubjectField> fields) {
+
+	public void setFields(List<SubjectField> fields) {
 		this.fields = fields;
 	}
 
-	public Set<SubjectField> getFields() {
+
+	public List<SubjectField> getFields() {
 		return fields;
 	}
+
 
 	public void setOwner(SubjectSet owner) {
 		this.owner = owner;
 	}
+
 
 	public SubjectSet getOwner() {
 		return owner;

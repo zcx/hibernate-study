@@ -10,16 +10,11 @@ import Metadata.metamodel.MetaClass;
 import Metadata.metamodel.MetaPackage;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class SubjectPackage extends MetaPackage{
 	
-	
-	public void loadAnnotatedClass(Configuration conf) {
-		conf.addAnnotatedClass(Subject.class);
-		conf.addAnnotatedClass(SubjectSet.class);
-		conf.addAnnotatedClass(SubjectDomain.class);
-		conf.addAnnotatedClass(SubjectField.class);
-		conf.addAnnotatedClass(SubjectPackage.class);
+	public SubjectPackage(Configuration configure) {
+		super(configure);
 	}
 
 	public MetaClass getSubjectDomain() {

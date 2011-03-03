@@ -1,4 +1,0 @@
-package com.succezbi.metadata;
-{
-
-}

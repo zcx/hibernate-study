@@ -45,9 +45,6 @@ public class MetaSlot {
 
 	@OneToMany
 	private List<MetaLink> links = new ArrayList<MetaLink>();
-	
-	public MetaSlot() {
-	}
 
 	public String getID() {
 		return this.id;

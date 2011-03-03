@@ -1,34 +1,35 @@
 package Metadata.subject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import Metadata.metamodel.MetaObject;
 
 @Entity
-@PrimaryKeyJoinColumn(name="ID", referencedColumnName="ID")
-@Table(name = "MDR_SUBJECT_SUBJECTSET")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "HBSubjectSet")
 public class SubjectSet extends MetaObject {
 
 	@OneToMany
-	private List<Subject> subjects = new ArrayList<Subject>();
+	private Set<Subject> subjects = new HashSet<Subject>();
 
 	@ManyToOne
 	@JoinColumn(name = "DOMAINID")
 	private SubjectDomain owner = null;
 
-	public void setSubjects(List<Subject> subjects) {
+	public void setSubjects(Set<Subject> subjects) {
 		this.subjects = subjects;
 	}
 
-	public List<Subject> getSubjects() {
+	public Set<Subject> getSubjects() {
 		return subjects;
 	}
 
