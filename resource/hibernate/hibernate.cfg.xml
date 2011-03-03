@@ -1,0 +1,23 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- 是否显示hibernate生成的sql -->
+		<property name="show_sql">true</property>
+		<!-- 是否自动调整数据库结构 -->
+		<property name="hbm2ddl.auto">update</property>
+		<!-- 将HQL翻译成sql的类 -->
+		<property name="query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
+		<!-- 数据库链接-->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://192.168.1.116:3306/hibernate?useUnicode=true&amp;characterEncoding=utf8</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		<!-- current session context 实现类 -->
+		<property name="current_session_context_class">thread</property>
+		<!-- 添加的一个自定义属性，用来自动添加这个包下面的所有entity-->
+		<property name="entity.package">org.hibernate.study.entity</property>
+	</session-factory>
+</hibernate-configuration>
