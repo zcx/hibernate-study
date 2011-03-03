@@ -17,6 +17,10 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "MDR_META_CLASS")
 public class MetaClass {
+	
+	protected MetaClass() {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Id
 	@Column(name = "ID", length = 32)
