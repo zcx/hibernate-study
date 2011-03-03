@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +27,8 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Table(name = "HBSLOT")
-public class HBSlot {
+@Table(name = "MDR_META_SLOT")
+public class MetaSlot {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -40,11 +40,11 @@ public class HBSlot {
 	@Column(name = "VERSION")
 	private int version;
 
-    @ManyToOne
-	private HBObject object = null;
+	@ManyToOne
+	private MetaObject object = null;
 
 	@OneToMany
-	private List<HBLink> links = new ArrayList<HBLink>();
+	private List<MetaLink> links = new ArrayList<MetaLink>();
 
 	public String getID() {
 		return this.id;
@@ -62,18 +62,19 @@ public class HBSlot {
 		return version;
 	}
 
-	public void setLinks(List<HBLink> links) {
+	public void setLinks(List<MetaLink> links) {
 		this.links = links;
 	}
 
-	public List<HBLink> getLinks() {
+	public List<MetaLink> getLinks() {
 		return links;
 	}
-	public void setObject(HBObject object) {
+
+	public void setObject(MetaObject object) {
 		this.object = object;
 	}
 
-	public HBObject getObject() {
+	public MetaObject getObject() {
 		return object;
 	}
 

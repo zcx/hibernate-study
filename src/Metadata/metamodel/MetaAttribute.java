@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,39 +15,39 @@ import javax.persistence.Version;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "HBATTRIBUTE")
-public class HBAttribute {
+@Table(name = "MDR_META_ATTRIBUTE")
+public class MetaAttribute {
 
 	@Id
 	@Column(name = "ID", length = 32)
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private int id;
-	
+
 	@Version
-	@Column(name="VERSION")
+	@Column(name = "VERSION")
 	private int version;
 
-	@Column(name="NAME")
+	@Column(name = "NAME")
 	private String name = null;
 
-	@Column(name="ISNULLABLE")
+	@Column(name = "ISNULLABLE")
 	private boolean isNullable = false;
-	
-	@Column(name="ISSTATIC")
+
+	@Column(name = "ISSTATIC")
 	private boolean isStatic = false;
 
-	@Column(name="ISINVERSEABLE")
+	@Column(name = "ISINVERSEABLE")
 	private boolean isInverseable = false;
 
 	@ManyToOne
-	private HBClass type = null;
+	private MetaClass type = null;
 
 	@ManyToOne
-	private HBClass owner = null;
+	private MetaClass owner = null;
 
 	@OneToMany
-	private List<HBAssociation> associations = new ArrayList<HBAssociation>();
+	private List<MetaAssociation> associations = new ArrayList<MetaAssociation>();
 
 	public int getId() {
 		return id;
@@ -89,27 +89,27 @@ public class HBAttribute {
 		this.isInverseable = isInverseable;
 	}
 
-	public HBClass getType() {
+	public MetaClass getType() {
 		return type;
 	}
 
-	public void setType(HBClass type) {
+	public void setType(MetaClass type) {
 		this.type = type;
 	}
 
-	public HBClass getOwner() {
+	public MetaClass getOwner() {
 		return owner;
 	}
 
-	public void setOwner(HBClass owner) {
+	public void setOwner(MetaClass owner) {
 		this.owner = owner;
 	}
 
-	public List<HBAssociation> getAssociations() {
+	public List<MetaAssociation> getAssociations() {
 		return associations;
 	}
 
-	public void setAssociations(List<HBAssociation> associations) {
+	public void setAssociations(List<MetaAssociation> associations) {
 		this.associations = associations;
 	}
 

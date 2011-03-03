@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import javax.persistence.Version;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="HBCLASS")
-public class HBClass {
+@Table(name = "MDR_META_CLASS")
+public class MetaClass {
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -32,19 +32,19 @@ public class HBClass {
 	private String name = null;
 
 	@OneToMany
-	private List<HBAttribute> attributes = new ArrayList<HBAttribute>();
+	private List<MetaAttribute> attributes = new ArrayList<MetaAttribute>();
 
 	@OneToMany
-	private List<HBObject> instances = new ArrayList<HBObject>();
+	private List<MetaObject> instances = new ArrayList<MetaObject>();
 
 	@ManyToOne
-	private HBClass superclass = null;
+	private MetaClass superclass = null;
 
 	@ManyToOne
-	private HBPackage namespace = null;
+	private MetaPackage namespace = null;
 
 	@OneToMany
-	private List<HBClass> subclasses = new ArrayList<HBClass>();
+	private List<MetaClass> subclasses = new ArrayList<MetaClass>();
 
 	public void setId(String id) {
 		this.id = id;
@@ -62,11 +62,11 @@ public class HBClass {
 		return version;
 	}
 
-	public void setAttributes(List<HBAttribute> attributes) {
+	public void setAttributes(List<MetaAttribute> attributes) {
 		this.attributes = attributes;
 	}
 
-	public List<HBAttribute> getAttributes() {
+	public List<MetaAttribute> getAttributes() {
 		return attributes;
 	}
 
@@ -78,35 +78,35 @@ public class HBClass {
 		return name;
 	}
 
-	public void setInstances(List<HBObject> instances) {
+	public void setInstances(List<MetaObject> instances) {
 		this.instances = instances;
 	}
 
-	public List<HBObject> getInstances() {
+	public List<MetaObject> getInstances() {
 		return instances;
 	}
 
-	public void setSuperclass(HBClass superclass) {
+	public void setSuperclass(MetaClass superclass) {
 		this.superclass = superclass;
 	}
 
-	public HBClass getSuperclass() {
+	public MetaClass getSuperclass() {
 		return superclass;
 	}
 
-	public void setNamespace(HBPackage namespace) {
+	public void setNamespace(MetaPackage namespace) {
 		this.namespace = namespace;
 	}
 
-	public HBPackage getNamespace() {
+	public MetaPackage getNamespace() {
 		return namespace;
 	}
 
-	public void setSubclasses(List<HBClass> subclasses) {
+	public void setSubclasses(List<MetaClass> subclasses) {
 		this.subclasses = subclasses;
 	}
 
-	public List<HBClass> getSubclasses() {
+	public List<MetaClass> getSubclasses() {
 		return subclasses;
 	}
 }

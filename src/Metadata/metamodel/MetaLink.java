@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +12,8 @@ import javax.persistence.Version;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="HBLINK")
-public class HBLink {
+@Table(name = "MDR_META_LINK")
+public class MetaLink{
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -27,31 +27,37 @@ public class HBLink {
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT1ID")
-	private HBSlot slot1;
+	private MetaSlot slot1;
 	
 	@OneToOne
 	@JoinColumn(name = "SLOT2ID")
-	private HBSlot slot2;
+	private MetaSlot slot2;
 	
-	public HBSlot getSlot1(){
+
+	public MetaSlot getSlot1(){
 		return this.slot1;
 	}
 	
-	public void setSlot1(HBSlot slot){
+
+	public void setSlot1(MetaSlot slot){
 		this.slot1 = slot;
 	}
 	
-	public HBSlot getSlot2(){
+
+	public MetaSlot getSlot2(){
 		return this.slot2;
 	}
 	
-	public void setSlot2(HBSlot slot){
+
+	public void setSlot2(MetaSlot slot){
 		this.slot2 = slot;
 	}
+
 
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 
 	public String getId() {
 		return id;

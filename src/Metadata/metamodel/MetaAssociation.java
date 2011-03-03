@@ -1,4 +1,4 @@
-package Metadata;
+package Metadata.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,45 +14,45 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "HBASSOCIATION")
-public class HBAssociation {
+@Table(name = "MDR_META_ASSOCIATION")
+public class MetaAssociation {
 
 	@Id
 	@Column(name = "ID", length = 32)
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
-	
-	@ManyToOne
-	private HBAttribute end1 = null;
-	
-	@ManyToOne
-	private HBAttribute end2 = null;
-	
-	@OneToMany
-	private List<HBLink> links = new ArrayList<HBLink>();
 
-	public void setEnd1(HBAttribute end1) {
+	@ManyToOne
+	private MetaAttribute end1 = null;
+
+	@ManyToOne
+	private MetaAttribute end2 = null;
+
+	@OneToMany
+	private List<MetaLink> links = new ArrayList<MetaLink>();
+
+	public void setEnd1(MetaAttribute end1) {
 		this.end1 = end1;
 	}
 
-	public HBAttribute getEnd1() {
+	public MetaAttribute getEnd1() {
 		return end1;
 	}
 
-	public void setEnd2(HBAttribute end2) {
+	public void setEnd2(MetaAttribute end2) {
 		this.end2 = end2;
 	}
 
-	public HBAttribute getEnd2() {
+	public MetaAttribute getEnd2() {
 		return end2;
 	}
 
-	public void setLinks(List<HBLink> links) {
+	public void setLinks(List<MetaLink> links) {
 		this.links = links;
 	}
 
-	public List<HBLink> getLinks() {
+	public List<MetaLink> getLinks() {
 		return links;
 	}
 
