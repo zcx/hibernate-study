@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
@@ -32,6 +33,10 @@ public class MetaLink{
 	@OneToOne
 	@JoinColumn(name = "SLOT2ID")
 	private MetaSlot slot2;
+	
+	@ManyToOne
+	@JoinColumn(name="ASSOCIATIONID")
+	private MetaAssociation type = null;
 	
 
 	public MetaSlot getSlot1(){

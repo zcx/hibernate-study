@@ -33,17 +33,18 @@ public class MetaClass {
 	@OneToMany(mappedBy="owner")
 	private List<MetaAttribute> attributes = new ArrayList<MetaAttribute>();
 
-	@OneToMany
+	@OneToMany(mappedBy="type")
 	private List<MetaObject> instances = new ArrayList<MetaObject>();
 
 	@ManyToOne
+	@JoinColumn(name="SUPERCLASSID")
 	private MetaClass superclass = null;
 
 	@ManyToOne
 	@JoinColumn(name="NAMESPACEID")
 	private MetaPackage namespace = null;
 
-	@OneToMany
+	@OneToMany(mappedBy="superclass")
 	private List<MetaClass> subclasses = new ArrayList<MetaClass>();
 
 	public void setVersion(int version) {

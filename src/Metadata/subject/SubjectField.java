@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import Metadata.metamodel.MetaObject;
@@ -24,6 +26,10 @@ public class SubjectField extends MetaObject{
 
 	@Column(name="ISUNIQUE")
 	private boolean isUnique;
+	
+	@ManyToOne
+	@JoinColumn(name="SUBJECTID")
+	private Subject owner = null;
 
 	public void setUnique(boolean isUnique) {
 		this.isUnique = isUnique;
@@ -55,5 +61,13 @@ public class SubjectField extends MetaObject{
 
 	public int getLen() {
 		return len;
+	}
+
+	public void setOwner(Subject owner) {
+		this.owner = owner;
+	}
+
+	public Subject getOwner() {
+		return owner;
 	}
 }

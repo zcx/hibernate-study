@@ -7,8 +7,6 @@ import org.hibernate.cfg.Configuration;
 import Metadata.metamodel.MetaClass;
 import Metadata.metamodel.MetaPackage;
 
-import com.mysql.jdbc.Field;
-
 @Entity
 public class DbPackage extends MetaPackage {
 	

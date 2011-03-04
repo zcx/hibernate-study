@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,12 +25,14 @@ public class MetaAssociation {
 	private String id;
 
 	@ManyToOne
+	@JoinColumn(name="END1")
 	private MetaAttribute end1 = null;
 
 	@ManyToOne
+	@JoinColumn(name="END2")
 	private MetaAttribute end2 = null;
 
-	@OneToMany
+	@OneToMany(mappedBy="type")
 	private List<MetaLink> links = new ArrayList<MetaLink>();
 
 	public void setEnd1(MetaAttribute end1) {

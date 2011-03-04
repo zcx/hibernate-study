@@ -15,7 +15,7 @@ import Metadata.metamodel.MetaObject;
 @Table(name="MDR_DB_CATALOG")
 public class Catalog extends MetaObject{
 	
-	@OneToMany
+	@OneToMany(mappedBy="owner")
 	private Set<Schema> schemas = new HashSet<Schema>();
 
 	public void setSchemas(Set<Schema> schemas) {

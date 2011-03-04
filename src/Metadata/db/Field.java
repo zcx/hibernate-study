@@ -2,14 +2,13 @@ package Metadata.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import Metadata.metamodel.MetaObject;
 
 @Entity
-@Table(name = "MDR_DB_FIELD")
+@javax.persistence.Table(name = "MDR_DB_FIELD")
 public class Field extends MetaObject {
 	@Column(name = "LEN", length = 64, nullable = true, scale = 0)
 	private int len;
@@ -22,6 +21,10 @@ public class Field extends MetaObject {
 
 	@Column(name = "ISUNIQUE")
 	private int unique;
+	
+	@ManyToOne
+	@JoinColumn(name="TABLEID")
+	private Table owner = null;
 
 	public void setLen(int len) {
 		this.len = len;
@@ -53,5 +56,13 @@ public class Field extends MetaObject {
 
 	public int getUnique() {
 		return unique;
+	}
+
+	public void setOwner(Table owner) {
+		this.owner = owner;
+	}
+
+	public Table getOwner() {
+		return owner;
 	}
 }

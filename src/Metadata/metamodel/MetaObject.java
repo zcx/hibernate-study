@@ -45,7 +45,7 @@ public class MetaObject {
 	@Column(name = "VERSION")
 	private int version;
 
-	@OneToMany
+	@OneToMany(mappedBy="object")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<MetaSlot> slots = new ArrayList<MetaSlot>();
 	

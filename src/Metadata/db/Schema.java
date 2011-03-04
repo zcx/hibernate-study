@@ -14,7 +14,7 @@ import Metadata.metamodel.MetaObject;
 @javax.persistence.Table(name = "MDR_DB_SCHEMA")
 public class Schema extends MetaObject {
 
-	@OneToMany
+	@OneToMany(mappedBy="owner")
 	private Set<Table> tables = new HashSet<Table>();
 
 	@ManyToOne

@@ -9,8 +9,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -41,7 +39,7 @@ public class Subject extends MetaObject {
 	@Column(name = "CAPTION")
 	private String caption = null;
 
-	@OneToMany
+	@OneToMany(mappedBy="owner")
 	private Set<SubjectField> fields = new HashSet<SubjectField>();
 
 	@ManyToOne

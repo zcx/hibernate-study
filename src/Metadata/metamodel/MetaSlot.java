@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,10 +42,14 @@ public class MetaSlot {
 	private int version;
 
 	@ManyToOne
+	@JoinColumn(name="OBJECTID")
 	private MetaObject object = null;
 
-	@OneToMany
-	private List<MetaLink> links = new ArrayList<MetaLink>();
+	@OneToMany(mappedBy="slot1")
+	private List<MetaLink> linkby = new ArrayList<MetaLink>();
+	
+	@OneToMany(mappedBy="slot2")
+	private List<MetaLink> linkto = new ArrayList<MetaLink>();
 	
 	public MetaSlot() {
 	}
@@ -65,20 +70,28 @@ public class MetaSlot {
 		return version;
 	}
 
-	public void setLinks(List<MetaLink> links) {
-		this.links = links;
-	}
-
-	public List<MetaLink> getLinks() {
-		return links;
-	}
-
 	public void setObject(MetaObject object) {
 		this.object = object;
 	}
 
 	public MetaObject getObject() {
 		return object;
+	}
+
+	public void setLinkby(List<MetaLink> linkby) {
+		this.linkby = linkby;
+	}
+
+	public List<MetaLink> getLinkby() {
+		return linkby;
+	}
+
+	public void setLinkto(List<MetaLink> linkto) {
+		this.linkto = linkto;
+	}
+
+	public List<MetaLink> getLinkto() {
+		return linkto;
 	}
 
 }

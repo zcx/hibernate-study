@@ -17,7 +17,7 @@ import Metadata.metamodel.MetaObject;
 @Table(name = "MDR_SUBJECT_SET")
 public class SubjectSet extends MetaObject {
 
-	@OneToMany
+	@OneToMany(mappedBy="owner")
 	private List<Subject> subjects = new ArrayList<Subject>();
 
 	@ManyToOne

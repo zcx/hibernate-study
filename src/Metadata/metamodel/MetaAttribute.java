@@ -49,8 +49,12 @@ public class MetaAttribute {
 	@JoinColumn(name="OWNERID")
 	private MetaClass owner = null;
 
-	@OneToMany
-	private List<MetaAssociation> associations = new ArrayList<MetaAssociation>();
+	@OneToMany(mappedBy="end1")
+	private List<MetaAssociation> linkby = new ArrayList<MetaAssociation>();
+	
+	@OneToMany(mappedBy="end2")
+	private List<MetaAssociation> linkto = new ArrayList<MetaAssociation>();
+	
 
 	public int getId() {
 		return id;
@@ -108,20 +112,28 @@ public class MetaAttribute {
 		this.owner = owner;
 	}
 
-	public List<MetaAssociation> getAssociations() {
-		return associations;
-	}
-
-	public void setAssociations(List<MetaAssociation> associations) {
-		this.associations = associations;
-	}
-
 	public void setVersion(int version) {
 		this.version = version;
 	}
 
 	public int getVersion() {
 		return version;
+	}
+
+	public void setLinkby(List<MetaAssociation> linkby) {
+		this.linkby = linkby;
+	}
+
+	public List<MetaAssociation> getLinkby() {
+		return linkby;
+	}
+
+	public void setLinkto(List<MetaAssociation> linkto) {
+		this.linkto = linkto;
+	}
+
+	public List<MetaAssociation> getLinkto() {
+		return linkto;
 	}
 
 }
