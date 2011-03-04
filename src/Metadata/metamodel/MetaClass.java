@@ -30,7 +30,7 @@ public class MetaClass {
 	@Column(name = "NAME")
 	private String name = null;
 
-	@OneToMany
+	@OneToMany(mappedBy="owner")
 	private List<MetaAttribute> attributes = new ArrayList<MetaAttribute>();
 
 	@OneToMany

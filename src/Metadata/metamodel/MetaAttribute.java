@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,9 +42,11 @@ public class MetaAttribute {
 	private boolean isInverseable = false;
 
 	@ManyToOne
+	@JoinColumn(name="TYPEID")
 	private MetaClass type = null;
 
 	@ManyToOne
+	@JoinColumn(name="OWNERID")
 	private MetaClass owner = null;
 
 	@OneToMany
