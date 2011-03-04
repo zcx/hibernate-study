@@ -1,8 +1,6 @@
 package Metadata.db;
 
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 
 import org.hibernate.cfg.Configuration;
 
@@ -12,7 +10,6 @@ import Metadata.metamodel.MetaPackage;
 import com.mysql.jdbc.Field;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class DbPackage extends MetaPackage {
 	
 	public void loadAnnotatedClass(Configuration conf) {

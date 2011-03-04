@@ -10,7 +10,7 @@ import Metadata.metamodel.MetaObject;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) 
-@Table(name="HBField")
+@Table(name="MDR_SUBJECT_FIELD")
 public class SubjectField extends MetaObject{
 	
 	@Column(name="LEN")

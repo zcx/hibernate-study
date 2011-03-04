@@ -5,28 +5,23 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import org.hibernate.annotations.GenericGenerator;
-
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "MDR_META_CLASS")
 public class MetaClass {
 	
-	protected MetaClass() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Id
-	@Column(name = "ID", length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String id = null;
+	@Column(name = "URI", length = 32)
+	private String uri = null;
 
 	@Version
 	@Column(name = "VERSION")
@@ -45,18 +40,11 @@ public class MetaClass {
 	private MetaClass superclass = null;
 
 	@ManyToOne
+	@JoinColumn(name="NAMESPACEID")
 	private MetaPackage namespace = null;
 
 	@OneToMany
 	private List<MetaClass> subclasses = new ArrayList<MetaClass>();
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getId() {
-		return id;
-	}
 
 	public void setVersion(int version) {
 		this.version = version;
@@ -112,5 +100,13 @@ public class MetaClass {
 
 	public List<MetaClass> getSubclasses() {
 		return subclasses;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+
+	public String getUri() {
+		return uri;
 	}
 }

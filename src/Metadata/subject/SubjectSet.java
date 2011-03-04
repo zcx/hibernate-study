@@ -14,7 +14,7 @@ import Metadata.metamodel.MetaObject;
 
 @Entity
 @PrimaryKeyJoinColumn(name="ID", referencedColumnName="ID")
-@Table(name = "MDR_SUBJECT_SUBJECTSET")
+@Table(name = "MDR_SUBJECT_SET")
 public class SubjectSet extends MetaObject {
 
 	@OneToMany

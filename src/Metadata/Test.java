@@ -2,6 +2,7 @@ package Metadata;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import Metadata.db.Catalog;
@@ -41,18 +42,23 @@ public class Test {
 	private void doTest1() throws Exception {
 		MetaDataRepository mdr = new MetaDataRepository();
 		SubjectPackage pkg = mdr.getPackage(SubjectPackage.class);
-		Session session = HibernateUtil.getSession();
-		HibernateUtil.beginTransaction();
 		SubjectFactory factory = pkg.getFactory();
 		Subject subject = factory.createSubject();
+		MetaClass type = subject.getType();
+		System.out.println(type);
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
 		try {
-			session.save(subject);
+			session.saveOrUpdate(subject);
+			tx.commit();
 		}
 		catch (Exception e) {
-			HibernateUtil.rollbackTransaction();
+			tx.rollback();
+			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		finally {
-			HibernateUtil.closeSession();
+			session.close();
 		}
 	}
 
@@ -63,10 +69,11 @@ public class Test {
 		try {
 			Subject subject = new Subject();
 			session.save(subject);
+			MetaClass type = subject.getType();
 			SubjectSet subjectset = new SubjectSet();
 			subjectset.getSubjects().add(subject);
 			session.save(subjectset);
-
+			
 			Catalog catalog = new Catalog();
 			session.save(catalog);
 			Schema schema = new Schema();

@@ -3,6 +3,7 @@ package Metadata.metamodel;
 import java.util.HashMap;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import Metadata.db.DbPackage;
@@ -19,32 +20,33 @@ public class MetaDataRepository {
 
 	public MetaDataRepository() {
 		try {
-			Configuration conf = HibernateUtil.getConfiguration();
+			Configuration conf = new Configuration();
 			conf.configure("/Metadata/metadata-hibernate.cfg.xml");
+			HibernateUtil.setConfiguration(conf);
 			MetaPackage mpkg = new MetaPackage();
-			mpkg.setName(MetaPackage.class.getName());
+			mpkg.setUri(MetaPackage.class.getPackage().getName());
 			mpkg.loadAnnotatedClass(conf);
 			SubjectPackage spkg = new SubjectPackage();
-			spkg.setName(SubjectPackage.class.getName());
+			spkg.setUri(SubjectPackage.class.getPackage().getName());
 			spkg.loadAnnotatedClass(conf);
 			DbPackage dpkg = new DbPackage();
-			dpkg.setName(DbPackage.class.getName());
+			dpkg.setUri(DbPackage.class.getPackage().getName());
 			dpkg.loadAnnotatedClass(conf);
 			HibernateUtil.rebuildSessionFactory(conf);
 			Session session = HibernateUtil.getSession();
-			HibernateUtil.beginTransaction();
+			Transaction tx = session.beginTransaction();
 			try {
 				session.saveOrUpdate(mpkg);
 				session.saveOrUpdate(spkg);
 				session.saveOrUpdate(dpkg);
-				HibernateUtil.commitTransaction();
+				tx.commit();
 			}
 			catch (Exception e) {
-				HibernateUtil.rollbackTransaction();
+				tx.rollback();
 				throw new RuntimeException(e);
 			}
 			finally {
-				HibernateUtil.closeSession();
+				session.close();
 			}
 		}
 		catch (Exception e) {
@@ -55,19 +57,19 @@ public class MetaDataRepository {
 	}
 
 	public <T extends MetaPackage> T getPackage(Class<T> cls) throws Exception {
-		String name = cls.getName();
+		String name = cls.getPackage().getName();
 		Session session = HibernateUtil.getSession();
-		HibernateUtil.beginTransaction();
+		Transaction tx = session.beginTransaction();
 		try {
 			Object pkg = session.get(MetaPackage.class, name);
 			return cls.cast(pkg);
 		}
 		catch (Exception e) {
-			HibernateUtil.rollbackTransaction();
+			tx.rollback();
 			throw new RuntimeException(e);
 		}
 		finally {
-			HibernateUtil.closeSession();
+			session.close();
 		}
 
 	}

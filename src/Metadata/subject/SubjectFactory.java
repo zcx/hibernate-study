@@ -1,22 +1,39 @@
 package Metadata.subject;
 
+import Metadata.metamodel.MetaClass;
 import Metadata.metamodel.MetaFactory;
 
 public class SubjectFactory extends MetaFactory{
-
-	public Subject createSubject() {
-		return new Subject();
+	private SubjectPackage pkg = null;
+	public SubjectFactory(SubjectPackage pkg) {
+		this.pkg = pkg;
 	}
 
-	public SubjectField createSubjectField() {
-		return new SubjectField();
+	public Subject createSubject() throws Exception {
+		MetaClass cls = this.pkg.getSubject();
+		Subject subject = new Subject();
+		subject.setType(cls);
+		return subject;
 	}
 
-	public SubjectSet createSubjectSet() {
-		return new SubjectSet();
+	public SubjectField createSubjectField() throws Exception {
+		MetaClass cls = this.pkg.getSubjectField();
+		SubjectField field = new SubjectField();
+		field.setType(cls);
+		return field;
 	}
 
-	public SubjectDomain createSubjectDomain() {
-		return new SubjectDomain();
+	public SubjectSet createSubjectSet() throws Exception {
+		MetaClass cls = this.pkg.getSubjectSet();
+		SubjectSet set = new SubjectSet();
+		set.setType(cls);
+		return set;
+	}
+
+	public SubjectDomain createSubjectDomain() throws Exception {
+		MetaClass cls = this.pkg.getSubjectDomain();
+		SubjectDomain domain = new SubjectDomain();
+		domain.setType(cls);
+		return domain;
 	}
 }

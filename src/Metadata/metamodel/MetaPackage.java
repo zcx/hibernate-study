@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 @Entity
@@ -22,26 +24,24 @@ import org.hibernate.cfg.Configuration;
 public class MetaPackage {
 
 	@Id
-//	@GeneratedValue(generator = "mpidGenerator")
-//	@GenericGenerator(name = "mpidGenerator", strategy = "Metadata.metamodel.MetaPackageIDGenerator", parameters = { @Parameter(name = "sequence", value = "seq_payablemoney") })
-	@Column(name="NAME")
-	private String name;
+	@Column(name = "URI")
+	private String uri;
 
 	@Version
 	@Column(name = "VERSION")
 	private int version;
 
-	@OneToMany
+	@OneToMany(mappedBy = "namespace")
 	public Set<MetaClass> classes = new HashSet<MetaClass>();
 
 	@ManyToOne
 	@JoinColumn(name = "SUPERPACKAGEID")
 	private MetaPackage superpackage = null;
 
-	@OneToMany
+	@OneToMany(mappedBy = "superpackage")
 	private Set<MetaPackage> subpackages = new HashSet<MetaPackage>();
-	
-	public void loadAnnotatedClass(Configuration conf){
+
+	public void loadAnnotatedClass(Configuration conf) {
 		conf.addAnnotatedClass(MetaLink.class);
 		conf.addAnnotatedClass(MetaObject.class);
 		conf.addAnnotatedClass(MetaSlot.class);
@@ -51,8 +51,25 @@ public class MetaPackage {
 		conf.addAnnotatedClass(MetaAssociation.class);
 	}
 
-	public MetaClass getClass(int classid) {
-		return null;
+	public MetaClass getClass(Class<?> cls) throws Exception {
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Object obj = session.get(MetaClass.class, cls.getName());
+			if (obj == null) {
+				return null;
+			}
+			return MetaClass.class.cast(obj);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			tx.rollback();
+			throw e;
+		}
+		finally {
+			session.close();
+		}
+
 	}
 
 	public void setVersion(int version) {
@@ -61,14 +78,6 @@ public class MetaPackage {
 
 	public int getVersion() {
 		return version;
-	}
-
-	protected void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public void setSuperpackage(MetaPackage superpackage) {
@@ -85,6 +94,14 @@ public class MetaPackage {
 
 	public Set<MetaPackage> getSubpackages() {
 		return subpackages;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+
+	public String getUri() {
+		return uri;
 	}
 
 }
