@@ -1,7 +1,14 @@
 package Metadata.db;
 
+import Metadata.metamodel.MetaFactory;
 
-public class DbFactory {
+
+public class DbFactory<P extends DbPackage> extends MetaFactory<P> {
+
+	public DbFactory(P pkg) {
+		super(pkg);
+	}
+
 	public Catalog createCatalog(){
 		return new Catalog();
 	}

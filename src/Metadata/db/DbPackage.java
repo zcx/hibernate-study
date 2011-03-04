@@ -18,20 +18,26 @@ public class DbPackage extends MetaPackage {
 		conf.addAnnotatedClass(DbPackage.class);
 	}
 
-	public MetaClass getCatalogClass() {
-		return null;
+	public MetaClass getCatalogClass() throws Exception {
+		return this.getMetaClassByJavaClass(Catalog.class, "Catalog");
 	}
 
-	public MetaClass getFieldClass() {
-		return null;
+	public MetaClass getFieldClass() throws Exception {
+		return this.getMetaClassByJavaClass(Field.class, "Field");
 	}
 
-	public MetaClass getSchemaClass() {
-		return null;
+	public MetaClass getSchemaClass() throws Exception {
+		return this.getMetaClassByJavaClass(Schema.class, "Schema");
 	}
 
-	public MetaClass getTableClass() {
-		return null;
+	public MetaClass getTableClass() throws Exception {
+		return this.getMetaClassByJavaClass(Table.class, "Table");
+	}
+	
+	
+	@Override
+	public DbFactory<DbPackage> getFactory() {
+		return new DbFactory<DbPackage>(this);
 	}
 
 }

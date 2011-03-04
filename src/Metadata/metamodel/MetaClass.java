@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -30,13 +31,13 @@ public class MetaClass {
 	@Column(name = "NAME")
 	private String name = null;
 
-	@OneToMany(mappedBy="owner")
+	@OneToMany(mappedBy="owner", fetch=FetchType.LAZY)
 	private List<MetaAttribute> attributes = new ArrayList<MetaAttribute>();
 
 	@OneToMany(mappedBy="type")
 	private List<MetaObject> instances = new ArrayList<MetaObject>();
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="SUPERCLASSID")
 	private MetaClass superclass = null;
 

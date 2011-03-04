@@ -18,6 +18,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import Metadata.subject.SubjectDomain;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "MDR_META_PACKAGE")
@@ -104,4 +106,32 @@ public class MetaPackage {
 		return uri;
 	}
 
+	protected MetaClass getMetaClassByJavaClass(Class<?> javacls, String name) throws Exception {
+		MetaClass cls = this.getClass(javacls);
+		if (cls != null) {
+			return cls;
+		}
+		cls = new MetaClass();
+		cls.setName(name);
+		cls.setUri(SubjectDomain.class.getName());
+		Session session = HibernateUtil.getSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.saveOrUpdate(cls);
+			tx.commit();
+		}
+		catch (Exception e) {
+			tx.rollback();
+			e.printStackTrace();
+			throw e;
+		}
+		finally {
+			session.close();
+		}
+		return cls;
+	}
+	
+	public MetaFactory<?> getFactory(){
+		return new MetaFactory<MetaPackage>(this);
+	}
 }
