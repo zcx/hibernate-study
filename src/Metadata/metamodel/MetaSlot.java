@@ -45,15 +45,19 @@ public class MetaSlot {
 	@JoinColumn(name="OBJECTID")
 	private MetaObject object = null;
 
+//	@OneToMany
+//    @JoinColumns ({
+//        @JoinColumn(name="linkby"),
+//        @JoinColumn(name="linkto")
+//    })
+//	private Set<MetaLink> links = new HashSet<MetaLink>();
+	
 	@OneToMany(mappedBy="slot1")
 	private List<MetaLink> linkby = new ArrayList<MetaLink>();
 	
 	@OneToMany(mappedBy="slot2")
 	private List<MetaLink> linkto = new ArrayList<MetaLink>();
 	
-	public MetaSlot() {
-	}
-
 	public String getID() {
 		return this.id;
 	}
@@ -93,5 +97,13 @@ public class MetaSlot {
 	public List<MetaLink> getLinkto() {
 		return linkto;
 	}
+
+//	public void setLinks(Set<MetaLink> links) {
+//		this.links = links;
+//	}
+//
+//	public Set<MetaLink> getLinks() {
+//		return links;
+//	}
 
 }

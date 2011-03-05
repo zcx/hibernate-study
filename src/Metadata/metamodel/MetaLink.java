@@ -2,37 +2,33 @@ package Metadata.metamodel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "MDR_META_LINK")
 public class MetaLink{
 
 	@Id
-	@Column(name = "ID", length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String id;
+//	@Column(name = "ID", length = 32)
+//	@GeneratedValue(generator = "system-uuid")
+//	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private MetaLinkPK id;
+	
+	@ManyToOne
+	@JoinColumn(name = "slot1id")
+	private MetaSlot slot1;
+	
+	@ManyToOne
+	@JoinColumn(name = "slot2id")
+	private MetaSlot slot2;
 	
 	@Version
 	@Column(name="VERSION")
 	public int version;
-	
-	@OneToOne
-	@JoinColumn(name = "SLOT1ID")
-	private MetaSlot slot1;
-	
-	@OneToOne
-	@JoinColumn(name = "SLOT2ID")
-	private MetaSlot slot2;
 	
 	@ManyToOne
 	@JoinColumn(name="ASSOCIATIONID")
@@ -59,12 +55,22 @@ public class MetaLink{
 	}
 
 
-	public void setId(String id) {
+	public void setId(MetaLinkPK id) {
 		this.id = id;
 	}
 	
 
-	public String getId() {
+	public MetaLinkPK getId() {
 		return id;
+	}
+
+
+	public void setType(MetaAssociation type) {
+		this.type = type;
+	}
+
+
+	public MetaAssociation getType() {
+		return type;
 	}
 }

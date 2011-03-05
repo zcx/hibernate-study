@@ -11,20 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TEST_CK_CHILD")
+@Table(name = "TEST_CK_CHILD")
 public class Child implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Integer id;
 
-    @ManyToOne
-    @JoinColumns ({
-        @JoinColumn(name="parentCivility", referencedColumnName = "isMale"),
-        @JoinColumn(name="parentLastName", referencedColumnName = "lastName"),
-        @JoinColumn(name="parentFirstName", referencedColumnName = "firstName")
-    })
+	@ManyToOne
+	@JoinColumns({ @JoinColumn(name = "parentCivility", referencedColumnName = "isMale"),
+			@JoinColumn(name = "parentLastName", referencedColumnName = "lastName"),
+			@JoinColumn(name = "parentFirstName", referencedColumnName = "firstName") })
 	private Parent parent; //unidirectional
 
 	public void setId(Integer id) {
@@ -43,4 +41,3 @@ public class Child implements Serializable {
 		return parent;
 	}
 }
-

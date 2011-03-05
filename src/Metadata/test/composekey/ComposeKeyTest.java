@@ -12,7 +12,7 @@ import Metadata.metamodel.HibernateUtil;
  *
  */
 public class ComposeKeyTest {
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 		conf.configure("/Metadata/metadata-hibernate.cfg.xml");
 		conf.addAnnotatedClass(Child.class);
@@ -21,7 +21,7 @@ public class ComposeKeyTest {
 		HibernateUtil.setConfiguration(conf);
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
-		try{
+		try {
 			Parent parent = new Parent();
 			ParentPk pk = new ParentPk();
 			pk.setFirstName("Class");
@@ -33,10 +33,12 @@ public class ComposeKeyTest {
 			session.saveOrUpdate(child);
 			//parent.getChildren().add(child);
 			tx.commit();
-		}catch(Exception e){
+		}
+		catch (Exception e) {
 			tx.rollback();
 			throw e;
-		}finally{
+		}
+		finally {
 			session.close();
 		}
 	}

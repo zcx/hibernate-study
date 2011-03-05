@@ -12,21 +12,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TEST_CK_PARENT")
+@Table(name = "TEST_CK_PARENT")
 public class Parent implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private ParentPk id;
-    private int age;
 
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumns ({
-        @JoinColumn(name="parentCivility", referencedColumnName = "isMale"),
-        @JoinColumn(name="parentLastName", referencedColumnName = "lastName"),
-        @JoinColumn(name="parentFirstName", referencedColumnName = "firstName")
-    })
+	private int age;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumns({ @JoinColumn(name = "parentCivility", referencedColumnName = "isMale"),
+			@JoinColumn(name = "parentLastName", referencedColumnName = "lastName"),
+			@JoinColumn(name = "parentFirstName", referencedColumnName = "firstName") })
 	private Set<Child> children; //unidirectional
 
 	public void setId(ParentPk id) {
@@ -53,4 +52,3 @@ public class Parent implements Serializable {
 		return children;
 	}
 }
-
