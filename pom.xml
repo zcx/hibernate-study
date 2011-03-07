@@ -4,6 +4,10 @@
 	<groupId>hibernate-study</groupId>
 	<artifactId>hibernate-study</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<!-- 20110214 设置输出路径和工程属性中的输出路径一致，具体原因参考util2.2工程的pom.xml 20110214号的注释 -->
+		<outputDirectory>bin</outputDirectory>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>antlr</groupId>
