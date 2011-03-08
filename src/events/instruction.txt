@@ -1,0 +1,7 @@
+此package是一个hibernate的简单示例，演示了hibernate如何存取数据，可以直接执行EventManager查看演示效果。
+此演示需要一个mysql的数据库，在event-hibernate.cfg.xml中定义：
+<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+<property name="connection.url">jdbc:mysql://192.168.1.105:3307/hibernate?useUnicode=true&amp;characterEncoding=utf8</property>
+<property name="connection.username">hibernate</property>
+<property name="connection.password">hibernate</property>
+<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
