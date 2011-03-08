@@ -7,7 +7,7 @@
 		<!-- 是否显示hibernate生成的sql -->
 		<property name="show_sql">true</property>
 		<!-- 是否自动调整数据库结构 -->
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		<!-- 将HQL翻译成sql的类 -->
 		<property name="query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property>
 		<!-- 数据库链接-->

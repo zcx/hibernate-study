@@ -2,6 +2,7 @@ package org.hibernate.study.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,7 +12,7 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @MappedSuperclass
-public class BaseId {
+public class BaseEntity {
 	protected String id;
 
 	public void setId(String id) {
@@ -23,6 +24,18 @@ public class BaseId {
 	@GenericGenerator(name = "uuid", strategy = "uuid")
 	public String getId() {
 		return id;
+	}
+	
+	
+	protected long version;
+
+	@Version
+	public long getVersion() {
+		return version;
+	}
+
+	protected void setVersion(long version) {
+		this.version = version;
 	}
 
 }
