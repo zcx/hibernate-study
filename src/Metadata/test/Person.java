@@ -5,16 +5,39 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name="PERSON")
-public interface Person{
+public class Person{
+
 	@Id
 	@Column(name="ID")
-	public int getId();
-	public void setId(int id);
-	public String getName();
-	public void setName(String name);
-	public int getAge();
-	public void setAge(int age);
+	public int getId() {
+		return 0;
+	}
+
+
+	public void setId(int id) {
+		
+	}
+
+
+	public String getName() {
+		return null;
+	}
+
+
+	public void setName(String name) {
+		
+	}
+
+
+	public int getAge() {
+		return 0;
+	}
+
+
+	public void setAge(int age) {
+
+	}
+
 }
