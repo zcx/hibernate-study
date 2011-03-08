@@ -3,7 +3,7 @@ package org.hibernate.study.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class Subject extends BaseId {
+public class Subject extends BaseEntity {
 
 	private String name;
 
