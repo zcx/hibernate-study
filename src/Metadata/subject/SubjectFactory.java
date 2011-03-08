@@ -5,7 +5,7 @@ import Metadata.metamodel.MetaFactory;
 
 public class SubjectFactory<P extends SubjectPackage> extends MetaFactory<P>{
 
-	public SubjectFactory(P pkg) {
+	protected SubjectFactory(P pkg) {
 		super(pkg);
 	}
 

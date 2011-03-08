@@ -3,7 +3,7 @@ package Metadata.metamodel;
 public class MetaFactory<P extends MetaPackage> {
 	private P pkg = null;
 
-	public MetaFactory(P pkg) {
+	protected MetaFactory(P pkg) {
 		this.pkg = pkg;
 	}
 

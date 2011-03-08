@@ -21,6 +21,7 @@
 
 		<!-- Enable Hibernate's automatic session context management -->
 		<property name="current_session_context_class">thread</property>
+		<property name="jdbc.batch_size">30</property>
 
 		<!-- Disable the second-level cache  -->
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>

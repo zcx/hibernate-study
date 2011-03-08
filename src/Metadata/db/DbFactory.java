@@ -5,7 +5,7 @@ import Metadata.metamodel.MetaFactory;
 
 public class DbFactory<P extends DbPackage> extends MetaFactory<P> {
 
-	public DbFactory(P pkg) {
+	protected DbFactory(P pkg) {
 		super(pkg);
 	}
 

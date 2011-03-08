@@ -9,12 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Version;
 
 import org.hibernate.annotations.Cascade;
@@ -32,9 +29,14 @@ import org.hibernate.annotations.GenericGenerator;
  *
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "MDR_META_OBJECT")
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class MetaObject {
+	
+	protected MetaObject(){
+		long time = System.currentTimeMillis();
+		this.modifytime = new Timestamp(time);
+		this.createtime = new Timestamp(time);
+	}
 
 	@Id
 	@Column(name = "ID", length = 32)
@@ -46,22 +48,19 @@ public class MetaObject {
 	@Column(name = "VERSION")
 	private int version;
 
-	@OneToMany(mappedBy="object")
+	@OneToMany(mappedBy = "object")
 	@Cascade(CascadeType.SAVE_UPDATE)
 	private List<MetaSlot> slots = new ArrayList<MetaSlot>();
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="CLASSID")
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CLASSID")
 	private MetaClass type = null;
-	
-	@Column(name="MODIFYTIME")
+
+	@Column(name = "MODIFYTIME")
 	private Timestamp modifytime = null;
-	
-	@Column(name="CREATETIME")
+
+	@Column(name = "CREATETIME")
 	private Timestamp createtime = null;
-	
-	protected MetaObject() {
-	}
 
 	public List<MetaSlot> getSlots() {
 		return this.slots;
@@ -86,7 +85,7 @@ public class MetaObject {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
+
 	public void setType(MetaClass type) {
 		this.type = type;
 	}
@@ -110,7 +109,7 @@ public class MetaObject {
 	public void setCreatetime(Timestamp createtime) {
 		this.createtime = createtime;
 	}
-	
+
 	/**
 	 * 获取创建时间
 	 * @return
