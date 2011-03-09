@@ -16,7 +16,7 @@ public class RptFactory<P extends RptPackage> extends MetaFactory<P>{
 	
 	public Report createReport(MGroup group) throws Exception{
 		Report rpt = new Report();
-		rpt.setGroup(group);
+		rpt.setParent(group.getName());
 		return rpt;
 	}
 }
