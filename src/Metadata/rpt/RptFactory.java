@@ -8,15 +8,17 @@ public class RptFactory<P extends RptPackage> extends MetaFactory<P>{
 		super(pkg);
 	}
 	
-	public MGroup createGroup() throws Exception{
-		MGroup group = new MGroup();
-		group.setIsgroup(true);
-		return group; 
+	public Directory createDirectory(String parent, String name) throws Exception{
+		Directory directory = new Directory();
+		directory.setParent(parent);
+		directory.setName(name);
+		return directory; 
 	}
 	
-	public Report createReport(MGroup group) throws Exception{
+	public Report createReport(Directory group, String name) throws Exception{
 		Report rpt = new Report();
 		rpt.setParent(group.getName());
+		rpt.setName(name);
 		return rpt;
 	}
 }

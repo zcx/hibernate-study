@@ -20,8 +20,10 @@ public class Namespace {
 	@Column(name = "ISROOT")
 	private boolean isRoot;
 
+	@Id
 	private String name = null;
 
+	@Id
 	private String parent = null;
 
 	public void setRoot(boolean isRoot) {
@@ -36,7 +38,6 @@ public class Namespace {
 		this.name = name;
 	}
 
-	@Id
 	public String getName() {
 		return name;
 	}
@@ -45,7 +46,6 @@ public class Namespace {
 		this.parent = parent;
 	}
 
-	@Id
 	public String getParent() {
 		return parent;
 	}
@@ -57,8 +57,12 @@ class NamespacePK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Column(name = "NAME", length = 32)
 	private String name = null;
 
+	@Id
+	@Column(name = "PARENT", length = 32)
 	private String parent = null;
 
 	public void setName(String name) {

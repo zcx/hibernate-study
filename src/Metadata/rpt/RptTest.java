@@ -17,11 +17,13 @@ public class RptTest {
 		MetaDataRepository mdr = new MetaDataRepository();
 		RptPackage pkg = mdr.getPackage(RptPackage.class);
 		RptFactory<RptPackage> factory = pkg.getFactory();
-		MGroup group = factory.createGroup();
+		Directory group = factory.createDirectory("/", "root");
+		Report report = factory.createReport(group, "rpt1.npf");
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		try {
 			session.saveOrUpdate(group);
+			session.saveOrUpdate(report);
 			tx.commit();
 		}
 		catch (Exception e) {

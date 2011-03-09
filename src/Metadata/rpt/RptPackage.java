@@ -11,7 +11,7 @@ import Metadata.metamodel.MetaPackage;
 public class RptPackage extends MetaPackage{
 	
 	public void loadAnnotatedClass(Configuration conf) {
-		conf.addAnnotatedClass(MGroup.class);
+		conf.addAnnotatedClass(Directory.class);
 		conf.addAnnotatedClass(Report.class);
 		conf.addAnnotatedClass(RptPackage.class);
 		conf.addAnnotatedClass(Namespace.class);
@@ -22,7 +22,7 @@ public class RptPackage extends MetaPackage{
 	}
 	
 	public MetaClass getGroupClass() throws Exception{
-		return getMetaClassByJavaClass(MGroup.class, "Group");
+		return getMetaClassByJavaClass(Directory.class, "Group");
 	}
 	
 	@Override
