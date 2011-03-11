@@ -6,6 +6,9 @@ import org.hibernate.cfg.Configuration;
 
 import Metadata.metamodel.MetaClass;
 import Metadata.metamodel.MetaPackage;
+import Metadata.object.NSName;
+import Metadata.object.NSParent;
+import Metadata.object.Namespace;
 
 @Entity
 public class RptPackage extends MetaPackage{
@@ -15,6 +18,8 @@ public class RptPackage extends MetaPackage{
 		conf.addAnnotatedClass(Report.class);
 		conf.addAnnotatedClass(RptPackage.class);
 		conf.addAnnotatedClass(Namespace.class);
+		conf.addAnnotatedClass(NSName.class);
+		conf.addAnnotatedClass(NSParent.class);
 	}
 	
 	public MetaClass getReportClass() throws Exception{
