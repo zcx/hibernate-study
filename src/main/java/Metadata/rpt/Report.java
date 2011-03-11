@@ -3,8 +3,6 @@ package Metadata.rpt;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import Metadata.object.Namespace;
-
 @Entity
 public class Report extends Namespace {
 	

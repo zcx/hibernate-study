@@ -19,13 +19,11 @@ public class RptTest {
 		RptFactory<RptPackage> factory = pkg.getFactory();
 		Directory group = factory.createDirectory("/", "root");
 		Report report = factory.createReport(group, "rpt1.npf");
-		Report report2 = factory.createReport(group, "rpt2.npf");
 		Session session = HibernateUtil.getSession();
 		Transaction tx = session.beginTransaction();
 		try {
 			session.saveOrUpdate(group);
 			session.saveOrUpdate(report);
-			session.saveOrUpdate(report2);
 			tx.commit();
 		}
 		catch (Exception e) {

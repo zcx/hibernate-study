@@ -2,9 +2,8 @@
 <project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="hibernate-study">
         <wb-resource deploy-path="/" source-path="/web"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/resource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <property name="context-root" value="hibernate-study"/>
         <property name="java-output-path" value="/hibernate-study/web/WEB-INF/classes"/>
     </wb-module>
