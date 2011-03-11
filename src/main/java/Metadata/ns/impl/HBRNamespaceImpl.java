@@ -1,41 +1,20 @@
 package Metadata.ns.impl;
 
+import java.util.List;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 
 import Metadata.ns.Namespace;
 
-@Entity(name = "Namespace")
-@NamedQueries(value = {
-//查找所有的叶子节点
-		@NamedQuery(name = "leafNS", query = "from FileObject"),
-		//
-		@NamedQuery(name = "moveTo", query = "from Namespace"),
-
-		//@NamedQuery(name = "renumber", query = "delete Namespace WHERE LFT=2"),
-		//
-		@NamedQuery(name = "copyTo", query = "from Namespace"),
-		//
-		@NamedQuery(name = "rename", query = "from Namespace"),
-		//
-		@NamedQuery(name = "listChilds", query = "from Namespace"),
-		//
-		@NamedQuery(name = "listAllChilds", query = "from Namespace"),
-
-//@NamedQuery(name="insertNamespace", query="update Namespace set lft = lft + 2 where lft < :lft")
-//
-})
+@MappedSuperclass
 public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Namespace {
 	
-	private static final String UPDATE_AFTER_INSERT = "update FileObject set LFT = 1 where LFT <> 1";
+	private static final String UPDATE_AFTER_INSERT = "update :Entity set LFT = 1 where LFT <> 1";
 	
 	private static final String GET_ALL_LEAFS = "from Namespace where LFT = RGT - 1";
 	
@@ -50,9 +29,6 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 	@Column(name = "NAME")
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "PID")
-	private HBRNamespaceImpl parent = null;
 
 	@Transient
 	private Session session;
@@ -68,7 +44,7 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 	}
 
 	public Namespace getParent() {
-		return parent;
+		return null;
 	}
 
 	public void setParent(HBRNamespaceImpl parent) {
@@ -81,7 +57,6 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 			this.setLeft(pleft + 1);
 			this.setRight(pleft + 2);
 		}
-		this.parent = parent;
 	}
 
 	public boolean isRoot() {
@@ -119,11 +94,16 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 
 	@Override
 	public String getAbsolutePath() {
-		Query query = session.createQuery("update FileObject set LFT = 1 where LFT <> 1");
-		//Query query = session.createQuery("from FileObject");
-		//query.setLockMode(paramString, paramLockMode);
-		int row = query.executeUpdate();
-		//System.out.println("执行了" + row + "行更新!");
+		DetachedCriteria cri = this.createDetachedCriteria();
+		List list = cri.getExecutableCriteria(session).list();
+		for(int i = 0; i < list.size();i++){
+			Object obj = list.get(i);
+			System.out.println(obj);
+		}
+//		query.setParameter("entity", this.getEntityName());
+//		//query.setLockMode(paramString, paramLockMode);
+//		int row = query.executeUpdate();
+//		System.out.println("执行了" + row + "行更新!");
 		return null;
 	}
 

@@ -10,6 +10,7 @@ import Metadata.metamodel.HibernateUtil;
 import Metadata.ns.impl.HBRFileObjectImpl;
 import Metadata.ns.impl.HBRMetaObjectImpl;
 import Metadata.ns.impl.HBRNamespaceImpl;
+import Metadata.ns.impl.HBROrganizationImpl;
 
 public class TestUnit extends TestCase{
 	@Override
@@ -19,6 +20,7 @@ public class TestUnit extends TestCase{
 		conf.addAnnotatedClass(HBRFileObjectImpl.class);
 		conf.addAnnotatedClass(HBRMetaObjectImpl.class);
 		conf.addAnnotatedClass(HBRNamespaceImpl.class);
+		conf.addAnnotatedClass(HBROrganizationImpl.class);
 		HibernateUtil.setConfiguration(conf);
 		super.setUp();
 	}
@@ -28,16 +30,21 @@ public class TestUnit extends TestCase{
 		Transaction tx = session.beginTransaction();
 		try{
 			HBRFileObjectImpl file = new HBRFileObjectImpl(session, null, "root", true);
-			session.save(file);
+			session.saveOrUpdate(file);
 			HBRFileObjectImpl file2 = new HBRFileObjectImpl(session, file, "child1", true);
-			session.save(file2);
+			session.saveOrUpdate(file2);
 			HBRFileObjectImpl file3 = new HBRFileObjectImpl(session, file, "child1", false);
-			session.save(file3);
+			session.saveOrUpdate(file3);
 			HBRFileObjectImpl file4 = new HBRFileObjectImpl(session, file, "child4", true);
-			session.save(file4);
+			session.saveOrUpdate(file4);
 			HBRFileObjectImpl file5 = new HBRFileObjectImpl(session, file2, "child5", false);
-			session.save(file5);
+			session.saveOrUpdate(file5);
+			System.out.println("【file.getAbsolutePath】");
 			file.getAbsolutePath();
+			System.out.println("【org.getAbsolutePath】");
+			HBROrganizationImpl org = new HBROrganizationImpl(session , null, "orgroot");
+			session.saveOrUpdate(org);
+			org.getAbsolutePath();
 			tx.commit();
 		}catch(Exception e){
 			tx.rollback();
