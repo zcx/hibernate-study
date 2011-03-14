@@ -1,4 +1,4 @@
-package Metadata.metamodel;
+package Metadata.util;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,7 +46,7 @@ public class HibernateUtil {
 		}
 	}
 
-	public static Session getSession() throws Exception {
+	public static Session getSession() {
 		return sessionFactory.openSession();
 	}
 }

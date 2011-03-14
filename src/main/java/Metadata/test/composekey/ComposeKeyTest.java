@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import Metadata.metamodel.HibernateUtil;
+import Metadata.util.HibernateUtil;
 
 /**
  * 测试创建聚合主键：

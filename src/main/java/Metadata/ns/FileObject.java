@@ -5,9 +5,9 @@ import java.io.OutputStream;
 
 public interface FileObject extends Namespace{
 	
-	public void setIsdir(boolean isdir);
+	public void setDir(boolean dir);
 
-	public boolean isIsdir();
+	public boolean isDir();
 	
 	public void writeTo(OutputStream os);
 	

@@ -1,4 +1,4 @@
-package Metadata.metamodel;
+package Metadata.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Interceptor;

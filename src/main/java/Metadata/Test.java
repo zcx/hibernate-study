@@ -3,12 +3,12 @@ package Metadata;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import Metadata.metamodel.HibernateUtil;
 import Metadata.metamodel.MetaClass;
 import Metadata.metamodel.MetaDataRepository;
 import Metadata.subject.Subject;
 import Metadata.subject.SubjectFactory;
 import Metadata.subject.SubjectPackage;
+import Metadata.util.HibernateUtil;
 
 /**
  * 测试类

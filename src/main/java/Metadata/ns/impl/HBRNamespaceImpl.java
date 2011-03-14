@@ -1,25 +1,20 @@
 package Metadata.ns.impl;
 
-import java.util.List;
+import java.util.Iterator;
 
 import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Entity;
 import javax.persistence.Transient;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
 
 import Metadata.ns.Namespace;
+import Metadata.util.HibernateUtil;
 
-@MappedSuperclass
+@Entity(name="Namespace")
 public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Namespace {
-	
-	private static final String UPDATE_AFTER_INSERT = "update :Entity set LFT = 1 where LFT <> 1";
-	
-	private static final String GET_ALL_LEAFS = "from Namespace where LFT = RGT - 1";
-	
-	private static final String MOVE_TO = "";
-	
+
 	@Column(name = "LFT")
 	private int left;
 
@@ -29,42 +24,35 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 	@Column(name = "NAME")
 	private String name;
 
-
 	@Transient
-	private Session session;
+	private String entityname = null;
 
-	protected HBRNamespaceImpl(Session session, Namespace parent, String name) {
-		this.session = session;
-		this.setParent((HBRNamespaceImpl) parent);
+	protected HBRNamespaceImpl(Namespace parent, String name) {
+		//this.setParent((HBRNamespaceImpl) parent);
 		this.setName(name);
-//		Iterator it = session.getNamedQuery("rm").iterate();
-//		while (it.hasNext()) {
-//			System.out.println("VFS对象：" + it.next());
-//		}
+		this.entityname = this.getEntityName();
 	}
 
 	public Namespace getParent() {
-		return null;
-	}
-
-	public void setParent(HBRNamespaceImpl parent) {
-		if (parent == null) {
-			this.setLeft(1);
-			this.setRight(2);
+		//查询LET<this.left,RGT>this.RGT，则得到全部的父节点，其中RGT最小的是直接父节点
+		Session session = HibernateUtil.getSession();
+		try {
+			StringBuffer sb = new StringBuffer();
+			sb.append("from ").append(entityname).append(" where LFT<").append(this.getLeft()).append(" and RGT > ").append(
+					this.getRight());
+			String hql = sb.toString();
+			Object obj = session.load(hql, null);
+			Iterator it = session.createQuery(hql).iterate();
+			if (it.hasNext()) {
+				return (Namespace) it.next();
+			}
+			else {
+				return null;
+			}
 		}
-		else {
-			int pleft = parent.getLeft();
-			this.setLeft(pleft + 1);
-			this.setRight(pleft + 2);
+		finally {
+			session.close();
 		}
-	}
-
-	public boolean isRoot() {
-		return false;
-	}
-
-	public void setIsRoot(boolean isroot) {
-
 	}
 
 	protected void setLeft(int left) {
@@ -94,16 +82,25 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 
 	@Override
 	public String getAbsolutePath() {
-		DetachedCriteria cri = this.createDetachedCriteria();
-		List list = cri.getExecutableCriteria(session).list();
-		for(int i = 0; i < list.size();i++){
-			Object obj = list.get(i);
-			System.out.println(obj);
-		}
-//		query.setParameter("entity", this.getEntityName());
-//		//query.setLockMode(paramString, paramLockMode);
-//		int row = query.executeUpdate();
-//		System.out.println("执行了" + row + "行更新!");
+		Session session = HibernateUtil.getSession();
+		String entityname = this.getEntityName();
+		StringBuffer sb = new StringBuffer(30);
+		sb.append("from ").append(entityname);
+		sb.append(" where LFT>10 OR RGT<3");
+		//		DetachedCriteria cri = this.createDetachedCriteria();
+		//		List list = cri.getExecutableCriteria(session).list();
+		//		for(int i = 0; i < list.size();i++){
+		//			Object obj = list.get(i);
+		//			System.out.println(obj);
+		//		}
+		Query query = session.createQuery("update FileObject set LFT=3");
+		query.executeUpdate();
+		//Iterator it = query.iterate();
+
+		//		query.setParameter("entity", this.getEntityName());
+		//		//query.setLockMode(paramString, paramLockMode);
+		//		int row = query.executeUpdate();
+		//		System.out.println("执行了" + row + "行更新!");
 		return null;
 	}
 
@@ -114,6 +111,8 @@ public abstract class HBRNamespaceImpl extends HBRMetaObjectImpl implements Name
 
 	@Override
 	public Namespace getRoot() {
+		Session session = HibernateUtil.getSession();
+		session = HibernateUtil.getSession();
 		return null;
 	}
 

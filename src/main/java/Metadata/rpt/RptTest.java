@@ -3,8 +3,8 @@ package Metadata.rpt;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import Metadata.metamodel.HibernateUtil;
 import Metadata.metamodel.MetaDataRepository;
+import Metadata.util.HibernateUtil;
 
 /**
  * 这个类主要用于测试报表存储时的目录结构如何通过元数据表达

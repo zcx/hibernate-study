@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Table;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.PolymorphismType;
 import org.hibernate.criterion.DetachedCriteria;
@@ -28,28 +26,27 @@ public final class HBRFileObjectImpl extends HBRNamespaceImpl implements FileObj
 	
 	private static final String ENTITYNAME = "FileObject";
 		
-	@Column(name = "ISDIR")
-	private boolean isdir;
+	@Column(name = "DIR")
+	private boolean dir;
 
 	@Column(name = "CONTENT")
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] content;
 
-	public HBRFileObjectImpl(Session session, HBRFileObjectImpl parent, String name, boolean isdir) {
-		super(session, parent, name);
-		this.setIsdir(isdir);
-		Query q = session.createQuery("update FileObject set LFT = 1 where LFT <> 1");
-		//Query q = session.createQuery("select p from FileObject as p where LFT = 1");
-		q.executeUpdate();
+	public HBRFileObjectImpl(FileObject parent, String name, boolean isdir) {
+		super(parent, name);
+		this.setDir(isdir);
+	}
+	
+	public void setDir(boolean dir) {
+		this.dir = dir;
 	}
 
-	public void setIsdir(boolean isdir) {
-		this.isdir = isdir;
+
+	public boolean isDir() {
+		return dir;
 	}
 
-	public boolean isIsdir() {
-		return isdir;
-	}
 
 	@Override
 	public void writeTo(OutputStream os) {
@@ -78,5 +75,4 @@ public final class HBRFileObjectImpl extends HBRNamespaceImpl implements FileObj
 	protected DetachedCriteria createDetachedCriteria() {
 		return DetachedCriteria.forClass(HBRFileObjectImpl.class);
 	}
-
 }

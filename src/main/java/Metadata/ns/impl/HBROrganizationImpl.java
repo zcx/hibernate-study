@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.Session;
 import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.criterion.DetachedCriteria;
 
@@ -29,8 +28,8 @@ public final class HBROrganizationImpl extends HBRNamespaceImpl implements Organ
 	@Column(name="DESCRIPTION", length=100)
 	private String description;
 	
-	public HBROrganizationImpl(Session session, Namespace parent, String name) {
-		super(session, parent, name);
+	public HBROrganizationImpl(Namespace parent, String name) {
+		super(parent, name);
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import Metadata.subject.SubjectDomain;
+import Metadata.util.HibernateUtil;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
