@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi verified="false" xmi.version="1.2" timestamp="2011-03-13T23:34:30" xmlns:MDR="http://succezbi.com/spec/MDR/0.0.1">
+	<xmi.header>
+		<xmi.documentation>
+			<xmi.exporter>com.succezbi.mdr.exporter</xmi.exporter>
+			<xmi.exporterVersion>0.0.1</xmi.exporterVersion>
+			<xmi.exporterEncoding>UnicodeUTF8</xmi.exporterEncoding>
+		</xmi.documentation>
+		<xmi.metamodel xmi.version="1.3" href="metamodel.mdr" xmi.name="MDR"/>
+	</xmi.header>
+	<xmi.content>
+		<MDR:Model>
+			<MDR:Namespace>
+				<MDR:MetaClass name="SubjectDomain" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dtG37AloogpX">
+				</MDR:MetaClass>
+				<MDR:MetaClass name="SubjectSet" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dtG37AloogpX">
+				</MDR:MetaClass>
+				<MDR:MetaClass name="Subject" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dtG37AloogpX">
+				</MDR:MetaClass>
+				<MDR:MetaClass name="VirtualSubject" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dtG37AloogpX">
+				</MDR:MetaClass>
+				<MDR:MetaClass name="PhysicalSubject" visibility="public" isSpecification="false" namespace="Logical View" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="dtG37AloogpX">
+				</MDR:MetaClass>
+				
+				
+				<MDR:Abstraction visibility="public" isSpecification="false" namespace="Logical View" supplier="QDnIqqtSTi0j" xmi.id="x7fHON4M1iqs" client="MzFR6JrvXxpU" name=""/>
+				<MDR:Abstraction visibility="public" isSpecification="false" namespace="Logical View" supplier="QDnIqqtSTi0j" xmi.id="MMpcEZsjimVm" client="dTmHoRVAud9k" name=""/>
+				<MDR:Abstraction visibility="public" isSpecification="false" namespace="Logical View" supplier="rLqVS2wwJzgL" xmi.id="IUbBQUS0hEFh" client="7pO63qraxXZL" name=""/>
+				<MDR:Abstraction visibility="public" isSpecification="false" namespace="Logical View" supplier="rLqVS2wwJzgL" xmi.id="hF7T0mILJGGX" client="QDnIqqtSTi0j" name=""/>
+			</MDR:Namespace>
+		</MDR:Model>
+	</xmi.content>
+</xmi>

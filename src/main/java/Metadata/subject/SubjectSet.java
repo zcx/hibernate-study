@@ -26,6 +26,7 @@ public class SubjectSet extends MetaObject {
 
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
+		
 	}
 
 	public List<Subject> getSubjects() {
