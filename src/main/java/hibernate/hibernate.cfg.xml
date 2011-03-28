@@ -19,5 +19,10 @@
 		<property name="current_session_context_class">thread</property>
 		<!-- 添加的一个自定义属性，用来自动添加这个包下面的所有entity-->
 		<property name="entity.package">org.hibernate.study.entity</property>
+		<property name="cache.use_second_level_cache">true</property>
+		<property name="cache.use_query_cache">false</property>
+		<property name="hibernate.generate_statistics">true</property>
+		<property name="cache.use_structured_entries">true</property>
+		<property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
 	</session-factory>
 </hibernate-configuration>
