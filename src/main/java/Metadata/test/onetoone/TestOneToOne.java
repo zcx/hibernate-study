@@ -22,6 +22,7 @@ public class TestOneToOne {
 			session.save(object);
 			TInstance instance = new TClassInstance();
 			instance.setName("name");
+			instance.setParentdir("/home/classfoo/classpath");
 			instance.setTobj(object);
 			session.save(instance);
 			tx.commit();

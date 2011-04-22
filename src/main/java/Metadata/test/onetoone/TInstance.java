@@ -2,7 +2,6 @@ package Metadata.test.onetoone;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -24,8 +23,11 @@ public abstract class TInstance {
 	private String name = null;
 	
 	@Id
+	private String parentdir = null;
+	
+	@OneToOne
+	@JoinColumn(name="ID")
 	private TObject tobj = null;
-
 
 	public void setTobj(TObject tobj) {
 		this.tobj = tobj;
@@ -43,19 +45,30 @@ public abstract class TInstance {
 		return name;
 	}
 
+
+	public void setParentdir(String parentdir) {
+		this.parentdir = parentdir;
+	}
+
+	public String getParentdir() {
+		return parentdir;
+	}
+
+
 	@Embeddable
 	public static class PrimaryKey implements Serializable {
 
 		private static final long serialVersionUID = 7582481434712381494L;
 
-		@Column(name="NAME")
+		@Id
+		@Column(name="NAME", length=64)
 		private String name = null;
 		
 		@Id
-		@OneToOne(cascade = CascadeType.ALL)
-		@JoinColumn(name="ID")
-		//@PrimaryKeyJoinColumn(name="id")
-		private TObject tobj = null;
+		@Column(name="PARENTDIR", length=100)
+		private String parentdir = null;
+		
+
 
 		public void setName(String name) {
 			this.name = name;
@@ -65,15 +78,14 @@ public abstract class TInstance {
 			return name;
 		}
 
-		public void setTobj(TObject tobj) {
-			this.tobj = tobj;
+		public void setParentdir(String parentdir) {
+			this.parentdir = parentdir;
 		}
 
-		public TObject getTobj() {
-			return tobj;
+		public String getParentdir() {
+			return parentdir;
 		}
-
-
+		
 	}
 
 }
