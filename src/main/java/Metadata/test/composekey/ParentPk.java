@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class ParentPk implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "FIRSTNAME", length = 25)

@@ -23,22 +23,22 @@ public class PersonTest {
 		Transaction tx = session.beginTransaction();
 		String id = null;
 		try {
-			Man man = new Man();
+			Person man = new Man();
 			session.saveOrUpdate(man);
-			Man man1 = new Man();
+			Person man1 = new Man();
 			session.saveOrUpdate(man1);
-			Man man2 = new Man();
+			Person man2 = new Man();
 			session.saveOrUpdate(man2);
-			Man man3 = new Man();
+			Person man3 = new Man();
 			session.saveOrUpdate(man3);
-			Man man4 = new Man();
+			Person man4 = new Man();
 			session.saveOrUpdate(man4);
 			
-			Woman woman = new Woman();
+			Person woman = new Woman();
 			session.saveOrUpdate(woman);
-			Woman woman1 = new Woman();
+			Person woman1 = new Woman();
 			session.saveOrUpdate(woman1);
-			Woman woman2 = new Woman();
+			Person woman2 = new Woman();
 			session.saveOrUpdate(woman2);
 			
 			Version version = new Version();

@@ -24,10 +24,10 @@ public class ComposeKeyTest {
 		try {
 			Parent parent = new Parent();
 			ParentPk pk = new ParentPk();
-			pk.setFirstName("Class");
-			pk.setLastName("Foo");
-			pk.setMale(true);
-			parent.setId(pk);
+			parent.setFirstName("Class");
+			parent.setLastName("Foo");
+			parent.setMale(true);
+			//parent.setId(pk);
 			session.saveOrUpdate(parent);
 			Child child = new Child();
 			session.saveOrUpdate(child);
