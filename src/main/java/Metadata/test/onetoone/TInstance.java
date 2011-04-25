@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name="TINSTANCE")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 @IdClass(TInstance.PrimaryKey.class)
-public abstract class TInstance {
+public abstract class TInstance extends TObject{
 	
 	@Id
 	private String name = null;
@@ -26,7 +26,7 @@ public abstract class TInstance {
 	private String parentdir = null;
 	
 	@OneToOne
-	@JoinColumn(name="ID")
+	@JoinColumn(name="OBJID")
 	private TObject tobj = null;
 
 	public void setTobj(TObject tobj) {
